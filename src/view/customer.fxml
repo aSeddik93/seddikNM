@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
+
+
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0"
+                prefWidth="326.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="285.0" text="Customer Details">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="customerName" layoutX="111.0" layoutY="116.0"/>
+        <TextField fx:id="customerSurname" layoutX="111.0" layoutY="174.0"/>
+        <TextField fx:id="customerEmail" layoutX="111.0" layoutY="231.0"/>
+        <Label layoutX="59.0" layoutY="68.0" text="Title:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label layoutX="28.0" layoutY="178.0" text="Surname:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label layoutX="52.0" layoutY="235.0" text="Email:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label layoutX="40.0" layoutY="290.0" text="Gender:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Label layoutX="14.0" layoutY="120.0" text="First Name:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <ChoiceBox layoutX="111.0" layoutY="64.0" prefHeight="27.0" prefWidth="167.0"/>
+        <RadioButton layoutX="113.0" layoutY="290.0" mnemonicParsing="false" onAction="#btnMale" prefHeight="18.0"
+                     prefWidth="113.0" text="Male">
+            <font>
+                <Font size="12.0"/>
+            </font>
+        </RadioButton>
+        <RadioButton layoutX="113.0" layoutY="317.0" mnemonicParsing="false" onAction="#btnFemale" text="Female">
+            <font>
+                <Font size="12.0"/>
+            </font>
+        </RadioButton>
+        <TextField fx:id="customerTelephone" layoutX="111.0" layoutY="357.0"/>
+        <Label layoutX="22.0" layoutY="361.0" text="Telephone:">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <Button layoutX="111.0" layoutY="447.0" mnemonicParsing="false" onAction="#BtnNextAction" prefHeight="27.0"
+                prefWidth="167.0" text="Next"/>
+    </AnchorPane>
+</Pane>

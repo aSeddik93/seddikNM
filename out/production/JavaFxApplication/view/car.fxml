@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+                prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+        <Label layoutX="40.0" layoutY="34.0" text="Car Details">
+            <font>
+                <Font size="26.0"/>
+            </font>
+        </Label>
+        <ListView fx:id="chosenMotor" layoutX="40.0" layoutY="77.0" prefHeight="113.0" prefWidth="534.0"/>
+        <Label layoutX="40.0" layoutY="200.0" text="Extras:">
+            <font>
+                <Font size="17.0"/>
+            </font>
+        </Label>
+        <RadioButton layoutX="40.0" layoutY="237.0" mnemonicParsing="false" onAction="#extra1" text="RadioButton"/>
+        <RadioButton layoutX="175.0" layoutY="237.0" mnemonicParsing="false" onAction="#extra2" text="RadioButton"/>
+        <RadioButton layoutX="421.0" layoutY="237.0" mnemonicParsing="false" onAction="#extra4" text="RadioButton"/>
+        <RadioButton layoutX="300.0" layoutY="237.0" mnemonicParsing="false" onAction="#extra3" text="RadioButton"/>
+        <TextField fx:id="price" layoutX="118.0" layoutY="281.0"/>
+        <Label layoutX="40.0" layoutY="286.0" text="Total Price:"/>
+        <Button layoutX="40.0" layoutY="332.0" mnemonicParsing="false" onAction="#BtnBookingAction" prefHeight="27.0"
+                prefWidth="534.0" text="Proceed to Booking"/>
+    </AnchorPane>
+</Pane>
