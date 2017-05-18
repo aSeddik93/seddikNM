@@ -59,7 +59,7 @@ public class Controller implements Initializable{
         if (list.get(0).identify(admin, pass)) {
             SceneManager.getInstance().loadSalesmanScene();
         } else if(list.get(1).identify(admin, pass)) {
-            //SCENE 2
+            SceneManager.getInstance().loadBookkeeperScene();
         } else if(list.get(2).identify(admin, pass)) {
             //SCENE 3
         } else if(list.get(3).identify(admin, pass)) {
