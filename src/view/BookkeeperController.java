@@ -47,21 +47,16 @@ public class BookkeeperController implements Initializable {
 
     public void initializeMotorhomeTable(){
         //initializes players tab
-        try {
 
             motorhomeList = fleet.getTheFleetList();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(("Can't load Players at the moment.");
-        }
         motorhomesTable.setEditable(true);
         motorhomeBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         motorhomeBrand.setCellFactory(TextFieldTableCell.forTableColumn());
         nbrPersons.setCellValueFactory(new PropertyValueFactory<>("capacity"));
-        nbrPersons.setCellFactory(TextFieldTableCell.forTableColumn());
+        //nbrPersons.setCellFactory(TextFieldTableCell.forTableColumn());
         motorhomePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        motorhomePrice.setCellFactory(TextFieldTableCell.forTableColumn());
+        //motorhomePrice.setCellFactory(TextFieldTableCell.forTableColumn());
         motorhomesTable.setItems(motorhomeList);
         //disables the delete button when there is nothing selected
         motorhomesTable.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue) -> {
