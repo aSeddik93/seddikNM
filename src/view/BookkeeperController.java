@@ -38,16 +38,11 @@ public class BookkeeperController implements Initializable {
 
     @FXML
     public void delete(ActionEvent event) throws IOException {
-        if(event.getSource().equals(motorhomeRemoveButton)){
-            SceneManager.getInstance().loadAvailableScene();
-        }
 
-        }
+    }
 
     @FXML
     public void add(ActionEvent event) throws IOException {
-        if(event.getSource().equals(motorhomeAddButton)){
-            SceneManager.getInstance().loadAvailableScene();
-        }
+
     }
 }
