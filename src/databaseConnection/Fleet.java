@@ -39,7 +39,7 @@ public class Fleet {
     private Fleet(){
         DBConnector db = new DBConnector();
         try {
-            ResultSet result = db.makeQuery("SELECT * FROM motorhome");
+            ResultSet result = db.makeQuery("select * from motorhome");
             while(result.next()){
                 Motorhome toAdd= new Motorhome(result.getString("brand"),result.getDouble("price"),
                         result.getInt("capacity"),result.getInt("id"));
@@ -49,5 +49,9 @@ public class Fleet {
             e.printStackTrace();
         }
         db.closeConnection();
+        //TODO remove, this is just for debugging
+        for(Motorhome m: theFleetList){
+            System.out.println(m);
+        }
     }
 }

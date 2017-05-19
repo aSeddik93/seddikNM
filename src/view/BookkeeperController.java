@@ -72,6 +72,7 @@ public class BookkeeperController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Staff staff= new Staff();
+        initializeMotorhomeTable();
 
     }
 

@@ -76,7 +76,7 @@ public class DBConnector {
      */
     private Connection getConnection(){
         String url = "jdbc:mysql://localhost:3306/";
-        String dbName = "foosball";
+        String dbName = "nordicmotorhomes";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
         String password = "";
@@ -91,6 +91,7 @@ public class DBConnector {
         }
         try {
             conn = DriverManager.getConnection(url+dbName,userName,password);
+            System.out.println("We got the connection"); //TODO remove, this was used for debugging
         } catch (SQLException e) {
             e.printStackTrace();
         }

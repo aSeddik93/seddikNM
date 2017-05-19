@@ -52,4 +52,13 @@ public class Motorhome {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "Motorhome{" +
+                "brand=" + brand.getValue() +
+                ", price=" + price.getValue() +
+                ", nbrPersons=" + nbrPersons.getValue() +
+                '}';
+    }
 }
