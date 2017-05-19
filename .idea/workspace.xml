@@ -118,9 +118,10 @@
       <file leaf-file-name="Fleet.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/databaseConnection/Fleet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="24" column="56" lean-forward="false" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+            <state relative-caret-position="597">
+              <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
               <folding>
+                <element signature="e#1035#1036#0" expanded="true" />
                 <element signature="e#1070#1071#0" expanded="true" />
               </folding>
             </state>
@@ -219,9 +220,9 @@
         <option value="$PROJECT_DIR$/src/view/SceneManager.java" />
         <option value="$PROJECT_DIR$/src/view/Controller.java" />
         <option value="$PROJECT_DIR$/src/model/Motorhome.java" />
-        <option value="$PROJECT_DIR$/src/databaseConnection/Fleet.java" />
         <option value="$PROJECT_DIR$/src/view/bookkeeper.fxml" />
         <option value="$PROJECT_DIR$/src/view/BookkeeperController.java" />
+        <option value="$PROJECT_DIR$/src/databaseConnection/Fleet.java" />
       </list>
     </option>
   </component>
@@ -730,7 +731,7 @@
       <workItem from="1495146295166" duration="4455000" />
       <workItem from="1495152361454" duration="462000" />
       <workItem from="1495153160635" duration="11000" />
-      <workItem from="1495153203908" duration="3873000" />
+      <workItem from="1495153203908" duration="3919000" />
     </task>
     <task id="LOCAL-00001" summary="Bookkeeper Menu connected to the controller">
       <created>1495151650246</created>
@@ -767,11 +768,18 @@
       <option name="project" value="LOCAL" />
       <updated>1495157027452</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Changes">
+      <created>1495157168321</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1495157168321</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34444000" />
+    <option name="totallyTimeSpent" value="34490000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="457" y="0" width="1466" height="1030" extended-state="0" />
@@ -1279,9 +1287,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/databaseConnection/Fleet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="24" column="56" lean-forward="false" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+        <state relative-caret-position="597">
+          <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
           <folding>
+            <element signature="e#1035#1036#0" expanded="true" />
             <element signature="e#1070#1071#0" expanded="true" />
           </folding>
         </state>
