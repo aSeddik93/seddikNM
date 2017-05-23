@@ -79,7 +79,7 @@ public class BookkeeperController implements Initializable {
     public void add(ActionEvent event) throws IOException {
         if (event.getSource().equals(motorhomeAddButton)) {
             System.out.println("HERE");
-            if (db.addMotorhome(fleet, newBrand.getText(), Integer.parseInt(newPrice.getText()), Double.parseDouble(newNbrPersons.getText()))) {
+            if (db.addMotorhome(fleet, newBrand.getText(), Integer.parseInt(newNbrPersons.getText()), Double.parseDouble(newPrice.getText()))) {
                 System.out.println("Motorhome added");
                 newBrand.clear();
                 newPrice.clear();
