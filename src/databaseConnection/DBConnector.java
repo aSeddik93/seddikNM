@@ -119,5 +119,18 @@ public class DBConnector {
         return res==1;
     }
 
+    public boolean deleteMotorhome(Fleet fleet, Motorhome byeMotorhome) {
+        try {
+            boolean flag= makeUpdate("DELETE FROM motorhome WHERE ID="+byeMotorhome.getId())==1;
+            ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
+            if(flag) motorhomeList.remove(byeMotorhome);
+            return flag;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeConnection();
+        return false;
+    }
+
 
 }

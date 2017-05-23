@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 public class BookkeeperController implements Initializable {
 
     private Fleet fleet = Fleet.getInstance();
+    ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
     private DBConnector db = new DBConnector();
 
     @FXML
@@ -48,8 +49,6 @@ public class BookkeeperController implements Initializable {
 
     public void initializeMotorhomeTable() {
         //initializes players tab
-
-        ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
 
         System.out.println(motorhomeList.get(0).getNbrPersons());
         motorhomesTable.setEditable(true);
@@ -77,11 +76,6 @@ public class BookkeeperController implements Initializable {
     }
 
     @FXML
-    public void delete(ActionEvent event) throws IOException {
-
-    }
-
-    @FXML
     public void add(ActionEvent event) throws IOException {
         if (event.getSource().equals(motorhomeAddButton)) {
             System.out.println("HERE");
@@ -95,6 +89,17 @@ public class BookkeeperController implements Initializable {
             }
         }
 
+    }
+
+    public void delete(ActionEvent event){
+        if(event.getSource().equals(motorhomeRemoveButton)){
+            Motorhome byeMotorhome = motorhomesTable.getSelectionModel().getSelectedItem();
+            if(!db.deleteMotorhome(fleet,byeMotorhome))
+                System.out.println("Could not delete Motorhome right now.");
+            else
+                System.out.println("Motorhome deleted from records.");
+
+        }
     }
 }
 
