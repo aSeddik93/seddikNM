@@ -12,10 +12,15 @@ public class Motorhome {
     private IntegerProperty nbrPersons = new SimpleIntegerProperty(this, "nbrPersons",0);
     private int id;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Motorhome(String brand, double price, int nbrPersons) {
         this.brand.setValue(brand);
         this.price.setValue(price);
         this.nbrPersons.setValue(nbrPersons);
+        this.id = 0;
     }
 
     public Motorhome(String brand, double price, int nbrPersons, int id) {

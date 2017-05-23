@@ -1,5 +1,6 @@
 package view;
 
+import databaseConnection.DBConnector;
 import databaseConnection.Fleet;
 import databaseConnection.Staff;
 import javafx.collections.ObservableList;
@@ -24,16 +25,17 @@ import java.util.ResourceBundle;
  */
 public class BookkeeperController implements Initializable {
 
-    private ObservableList<Motorhome> motorhomeList;
-
     private Fleet fleet = Fleet.getInstance();
+    private DBConnector db = new DBConnector();
 
     @FXML
     TableView<Motorhome> motorhomesTable;
     @FXML
+    TableColumn<Motorhome, Integer> motorhomeId;
+    @FXML
     TableColumn<Motorhome, String> motorhomeBrand;
     @FXML
-    TableColumn<Motorhome, Integer> nbrPersons,motorhomeId;
+    TableColumn<Motorhome, Integer> nbrPersons;
     @FXML
     TableColumn<Motorhome, Double> motorhomePrice;
 
@@ -44,26 +46,24 @@ public class BookkeeperController implements Initializable {
     public Button motorhomeAddButton;
 
 
-
-    public void initializeMotorhomeTable(){
+    public void initializeMotorhomeTable() {
         //initializes players tab
 
-            motorhomeList = fleet.getTheFleetList();
+        ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
 
+        System.out.println(motorhomeList.get(0).getNbrPersons());
         motorhomesTable.setEditable(true);
+        nbrPersons.setCellValueFactory(new PropertyValueFactory<>("nbrPersons"));
+        motorhomeId.setCellValueFactory(new PropertyValueFactory<>("id"));
         motorhomeBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         motorhomeBrand.setCellFactory(TextFieldTableCell.forTableColumn());
-        nbrPersons.setCellValueFactory(new PropertyValueFactory<>("capacity"));
-        //nbrPersons.setCellFactory(TextFieldTableCell.forTableColumn());
         motorhomePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        //motorhomePrice.setCellFactory(TextFieldTableCell.forTableColumn());
         motorhomesTable.setItems(motorhomeList);
         //disables the delete button when there is nothing selected
-        motorhomesTable.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue) -> {
-            if(newValue==null){
+        motorhomesTable.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            if (newValue == null) {
                 motorhomeRemoveButton.setDisable(true);
-            }
-            else
+            } else
                 motorhomeRemoveButton.setDisable(false);
         });
     }
@@ -71,7 +71,7 @@ public class BookkeeperController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Staff staff= new Staff();
+        Staff staff = new Staff();
         initializeMotorhomeTable();
 
     }
@@ -83,6 +83,19 @@ public class BookkeeperController implements Initializable {
 
     @FXML
     public void add(ActionEvent event) throws IOException {
+        if (event.getSource().equals(motorhomeAddButton)) {
+            System.out.println("HERE");
+            if (db.addMotorhome(fleet, newBrand.getText(), Integer.parseInt(newPrice.getText()), Double.parseDouble(newNbrPersons.getText()))) {
+                System.out.println("Motorhome added");
+                newBrand.clear();
+                newPrice.clear();
+                newNbrPersons.clear();
+            } else {
+                System.out.println(("Could not add Motorhome right now."));
+            }
+        }
 
     }
 }
+
+

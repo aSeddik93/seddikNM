@@ -1,5 +1,8 @@
 package databaseConnection;
 
+import javafx.collections.ObservableList;
+import model.Motorhome;
+
 import java.sql.*;
 
 /**
@@ -98,6 +101,23 @@ public class DBConnector {
         return conn;
     }
 
+    public boolean addMotorhome(Fleet fleet, String brand, int capacity, double price) {
+        int res = 0;
+        try {
+            ResultSet getId=makeQuery("select max(id) from motorhome");
+            getId.next();
+            int id=getId.getInt(1)+1;
+            System.out.println(id);
+            Motorhome newMotorhome= new Motorhome(brand,price,capacity);
+            newMotorhome.setId(id);
+            res = makeUpdate("INSERT INTO motorhome (id, capacity, price, brand) VALUES ('"+id+"','"+capacity+"','"+price+"','"+brand+"')");
+            ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
+            if(res==1)motorhomeList.add(newMotorhome);
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
+        return res==1;
+    }
 
 
 }
