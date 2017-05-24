@@ -54,4 +54,15 @@ public class Fleet {
             System.out.println(m);
         }
     }
+
+    public void updateMotorhome(Motorhome toUpdate, String column, String newValue){
+        DBConnector db = new DBConnector();
+        try {
+            db.makeUpdate("UPDATE motorhome SET "+column+"='"+newValue+"' WHERE id="+toUpdate.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //TODO handle it properly
+        }
+    }
+
 }
