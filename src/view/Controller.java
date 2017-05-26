@@ -74,34 +74,7 @@ public class Controller implements Initializable{
         }
     }
 
-    @FXML
-    public void btnSearch() throws IOException {
-        SceneManager.getInstance().loadAvailableScene();
-    }
 
-    @FXML
-    public void MotorhomeSelection() throws IOException {
-        SceneManager.getInstance().loadCarDetailsScene();
-    }
-
-    @FXML
-    public void extra1() throws IOException {
-        SceneManager.getInstance().loadCarDetailsScene();
-    }
-    @FXML
-    public void extra2() throws IOException {
-        SceneManager.getInstance().loadCarDetailsScene();
-    }
-    public void extra3() throws IOException {
-        SceneManager.getInstance().loadCarDetailsScene();
-    }
-    public void extra4() throws IOException {
-        SceneManager.getInstance().loadCarDetailsScene();
-    }
-    @FXML
-    public void BtnBookingAction() throws IOException {
-        SceneManager.getInstance().loadCustomerDetailsScene();
-    }
 
     public void btnMale(ActionEvent actionEvent) throws IOException {
     }
@@ -109,15 +82,8 @@ public class Controller implements Initializable{
     public void btnFemale(ActionEvent actionEvent) throws IOException {
     }
 
-    public void BtnNextAction() throws IOException {
-        SceneManager.getInstance().loadBillingDetailsScene();
-    }
 
     public void printSelection(ActionEvent actionEvent) throws IOException {
-    }
-
-    public void BtnNextAction1(ActionEvent actionEvent) throws IOException {
-        SceneManager.getInstance().loadConfirmationDetailsScene();
     }
 
     public void LogOutAction(ActionEvent actionEvent) throws IOException  {

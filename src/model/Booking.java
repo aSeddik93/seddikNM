@@ -21,8 +21,10 @@ public class Booking {
     private BooleanProperty extra2 = new SimpleBooleanProperty(this, "extra2", false);
     private BooleanProperty extra3 = new SimpleBooleanProperty(this, "extra3", false);
     private BooleanProperty extra4 = new SimpleBooleanProperty(this, "extra4", false);
+    private Customer customer;
 
-    public Booking(int id, String status, Double distance1, Double distance2, String startDate, String endDate, Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
+    public Booking(int id, String status, Double distance1, Double distance2, String startDate, String endDate,
+                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
         this.id = id;
         this.status.setValue(status);
         this.distance1.setValue(distance1);
@@ -35,7 +37,8 @@ public class Booking {
         this.extra4.setValue(extra4);
     }
 
-    public Booking(String status, Double distance1, Double distance2, String startDate, String endDate, Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
+    public Booking(String status, Double distance1, Double distance2, String startDate, String endDate,
+                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
         this.status.setValue(status);
         this.distance1.setValue(distance1);
         this.distance2.setValue(distance2);
