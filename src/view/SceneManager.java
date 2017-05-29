@@ -43,4 +43,10 @@ public class SceneManager {
         Scene bookkeeperScene = new Scene(bookkeeperRoot, 900, 575);
         primaryStage.setScene(bookkeeperScene);
     }
+
+    void loadMechanicScene() throws IOException{
+        Parent mechanicRoot = FXMLLoader.load(getClass().getResource("/view/mechanic.fxml"));
+        Scene mechanicScene = new Scene(mechanicRoot, 900, 575);
+        primaryStage.setScene(mechanicScene);
+    }
 }

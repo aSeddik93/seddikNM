@@ -109,13 +109,13 @@ public class DBConnector {
     public boolean addMotorhome(Fleet fleet, String brand, int capacity, double price) {
         int res = 0;
         try {
-            ResultSet getId=makeQuery("select max(id) from motorhome");
+            ResultSet getId=makeQuery("select max(motorhomeid) from motorhome");
             getId.next();
             int id=getId.getInt(1)+1;
             System.out.println(id);
             Motorhome newMotorhome= new Motorhome(brand,price,capacity);
             newMotorhome.setId(id);
-            res = makeUpdate("INSERT INTO motorhome (id, capacity, price, brand) VALUES ('"+id+"','"+capacity+"','"+price+"','"+brand+"')");
+            res = makeUpdate("INSERT INTO motorhome (motorhomeid, capacity, price, brand) VALUES ('"+id+"','"+capacity+"','"+price+"','"+brand+"')");
             ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
             if(res==1)motorhomeList.add(newMotorhome);
         } catch (Exception e ) {
@@ -126,7 +126,7 @@ public class DBConnector {
 
     public boolean deleteMotorhome(Fleet fleet, Motorhome byeMotorhome) {
         try {
-            boolean flag= makeUpdate("DELETE FROM motorhome WHERE ID="+byeMotorhome.getId())==1;
+            boolean flag= makeUpdate("DELETE FROM motorhome WHERE motorhomeid="+byeMotorhome.getId())==1;
             ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
             if(flag) motorhomeList.remove(byeMotorhome);
             return flag;
@@ -141,7 +141,7 @@ public class DBConnector {
                                Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
         int res = 0;
         try {
-            ResultSet getId=makeQuery("select max(id) from bookings");
+            ResultSet getId=makeQuery("select max(bookingid) from bookings");
             getId.next();
             int id=getId.getInt(1)+1;
             System.out.println(id);
@@ -154,7 +154,7 @@ public class DBConnector {
             if (extra2 == true) { ex2 = 1;}
             if (extra3 == true) { ex3 = 1;}
             if (extra4 == true) { ex4 = 1;}
-            res = makeUpdate("INSERT INTO bookings (id, startDate, endDate, distance1, distance2, extra1,extra2,extra3,extra4,status) VALUES" +
+            res = makeUpdate("INSERT INTO bookings (bookingid, startDate, endDate, distance1, distance2, extra1,extra2,extra3,extra4,status) VALUES" +
                     " ('"+id+"','"+startDate+"','"+endDate+"','"+distance1+"','"+distance2+"','"+ex1+"','"+ex2+"','"+ex3+"','"+ex4+"','"+status+"')");
             ObservableList<Booking> bookingList = bookings.getTheBookingList();
             if(res==1) bookingList.add(newBooking);
@@ -167,13 +167,13 @@ public class DBConnector {
     public boolean addPayment(Payments payments, String cardType, String cardNumber, String cardHolder, String cardCVC, String cardExpiry, double amount) {
         int res = 0;
         try {
-            ResultSet getId=makeQuery("select max(id) from payments");
+            ResultSet getId=makeQuery("select max(paymentid) from payments");
             getId.next();
             int id=getId.getInt(1)+1;
             System.out.println(id);
             Payment newPayment= new Payment(cardType, cardNumber, cardHolder, cardCVC, cardExpiry, amount);
             newPayment.setId(id);
-            res = makeUpdate("INSERT INTO payments (id,cardtype,cardnumber,cardcvc,cardholder,cardexpiry,amount) VALUES" +
+            res = makeUpdate("INSERT INTO payments (paymentid,cardtype,cardnumber,cardcvc,cardholder,cardexpiry,amount) VALUES" +
                     " ('"+id+"','"+cardType+"','"+cardNumber+"','"+cardCVC+"','"+cardHolder+"','"+cardExpiry+"','"+amount+"')");
             List<Payment> paymentList = payments.getPaymentList();
             if(res==1) paymentList.add(newPayment);
@@ -190,14 +190,14 @@ public class DBConnector {
    public boolean addCustomer(Customers customers, String title, String name, String email,LocalDate dob, String tel) {
         int res = 0;
         try {
-            ResultSet getId=makeQuery("select max(id) from customers");
+            ResultSet getId=makeQuery("select max(customerid) from customers");
             getId.next();
             int id=getId.getInt(1)+1;
             System.out.println(id);
             Customer newCustomer= new Customer(title, name, email, dob, tel);
             newCustomer.setId(id);
 
-            res = makeUpdate("INSERT INTO customers (id, name, email, title, telephone, dob) VALUES" +
+            res = makeUpdate("INSERT INTO customers (customerid, name, email, title, telephone, dob) VALUES" +
                     " ('"+id+"','"+name+"','"+email+"','"+title+"','"+tel+"','"+dob+"')");
             ObservableList<Customer> customerList = customers.getTheCustomerList();
             if(res==1) customerList.add(newCustomer);

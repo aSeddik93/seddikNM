@@ -42,7 +42,7 @@ public class Fleet {
             ResultSet result = db.makeQuery("select * from motorhome");
             while(result.next()){
                 Motorhome toAdd= new Motorhome(result.getString("brand"),result.getDouble("price"),
-                        result.getInt("capacity"),result.getInt("id"));
+                        result.getInt("capacity"),result.getInt("motorhomeid"));
                 theFleetList.add(toAdd);
             }
         } catch (SQLException e) {

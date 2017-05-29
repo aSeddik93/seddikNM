@@ -121,13 +121,14 @@ public class SalesmanController implements Initializable {
     public void bookOnAction(ActionEvent event) throws IOException {
         if (event.getSource().equals(book)) {
 
-            db.addBooking(bookings,"Booked", Double.parseDouble(newPickUp.getText()), Double.parseDouble(newDropOff.getText()),
-                  PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(),picnic.isSelected(),chairs.isSelected());
-
             db.addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),999);
 
+            db.addBooking(bookings,"Booked", Double.parseDouble(newPickUp.getText()), Double.parseDouble(newDropOff.getText()),
+                    PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(),picnic.isSelected(),chairs.isSelected()
+            );
 
             db.addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
+
         }
 
 

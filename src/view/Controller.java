@@ -63,7 +63,7 @@ public class Controller implements Initializable{
         } else if(list.get(2).identify(admin, pass)) {
             //SCENE 3
         } else if(list.get(3).identify(admin, pass)) {
-            //SCENE 4
+            SceneManager.getInstance().loadMechanicScene();
         }
         else {
             Alert wrongCredentials = new Alert(Alert.AlertType.ERROR);

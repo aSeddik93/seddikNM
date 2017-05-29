@@ -31,7 +31,7 @@ public class Customers {
             while(result.next()){
                 Customer toAdd= new Customer(result.getString("title"),result.getString("name"),
                         result.getString("email"), result.getString("dob"),result.getInt("telephone")
-                        ,result.getInt("id"));
+                        ,result.getInt("customerid"));
                 final boolean add = theCustomerList.add(toAdd);
             }
         } catch (SQLException e) {

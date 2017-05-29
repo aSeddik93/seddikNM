@@ -29,7 +29,7 @@ public class Bookings {
         try {
             ResultSet result = db.makeQuery("select * from bookings");
             while(result.next()){
-                Booking toAdd= new Booking(result.getInt("id"), result.getString("status"),result.getDouble("distance1"),
+                Booking toAdd= new Booking(result.getInt("bookingid"), result.getString("status"),result.getDouble("distance1"),
                         result.getDouble("distance2"), result.getString("startDate"), result.getString("endDate"),
                         result.getBoolean("extra1"), result.getBoolean("extra2"), result.getBoolean("extra3"),
                         result.getBoolean("extra4"));
