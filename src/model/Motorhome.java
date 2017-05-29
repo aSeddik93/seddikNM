@@ -6,6 +6,7 @@ import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,8 +19,6 @@ public class Motorhome {
     private IntegerProperty nbrPersons = new SimpleIntegerProperty(this, "nbrPersons",0);
     private ObservableList<Booking> bookingList = null;
     private String status;
-
-
     private int id;
 
     /**
@@ -145,4 +144,28 @@ public class Motorhome {
                 });
 
     }
+
+    /**
+     * this method is called by the TheFleet singleton,
+     * whenever we launch the app, all Motorhomes are loaded from the DB
+     * and constructed by the TheFleet.
+     * Bookings singleton is already constructed,
+     * so by iterating we get a list of
+     *@param bookingsOfThisMotorhome all relevant for this Motorhome bookings.
+     */
+    public void setBookingList(ArrayList<Booking> bookingsOfThisMotorhome) {
+        //here we get an ArrayList but the destination is an ObservableList,
+        //so we pass the ArrayList (which implements the Collection Interface)
+        //to the method addAll() of the ObservableList which can receive a Collection.
+        bookingList.addAll(bookingsOfThisMotorhome);
+    }
+
+    /**
+     * to be used later
+     * @param newBooking latest booking to be added to the Motorhome's list of Bookings.
+     */
+    public void addBooking(Booking newBooking){
+        this.bookingList.add(newBooking);
+    }
+
 }

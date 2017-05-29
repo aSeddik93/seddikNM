@@ -94,5 +94,13 @@ public class Payment {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
 }
 

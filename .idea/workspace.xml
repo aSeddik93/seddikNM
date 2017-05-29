@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/view/Controller.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/view/Controller.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/view/SceneManager.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/view/SceneManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Bookings.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Bookings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Customers.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Customers.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/DBConnector.java" afterPath="$PROJECT_DIR$/src/databaseConnection/DBConnector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Fleet.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Fleet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Payments.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Payments.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Booking.java" afterPath="$PROJECT_DIR$/src/model/Booking.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Motorhome.java" afterPath="$PROJECT_DIR$/src/model/Motorhome.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Payment.java" afterPath="$PROJECT_DIR$/src/model/Payment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/SalesmanController.java" afterPath="$PROJECT_DIR$/src/view/SalesmanController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/Controller.java" afterPath="$PROJECT_DIR$/src/view/Controller.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,24 +85,6 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="nordicmotorhomes" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="bookings" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
   </component>
   <component name="DebuggerManager">
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
@@ -152,30 +133,57 @@
       <file leaf-file-name="DBConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/databaseConnection/DBConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
-              <caret line="137" column="5" lean-forward="false" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
+            <state relative-caret-position="274">
+              <caret line="66" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SalesmanController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/view/SalesmanController.java">
+      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3975">
-              <caret line="159" column="1" lean-forward="true" selection-start-line="159" selection-start-column="1" selection-end-line="159" selection-end-column="1" />
+            <state relative-caret-position="377">
+              <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Booking.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/Booking.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="574">
+              <caret line="267" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="267" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#5401#5402#0" expanded="true" />
+                <element signature="e#5435#5436#0" expanded="true" />
+                <element signature="e#5486#5487#0" expanded="true" />
+                <element signature="e#5532#5533#0" expanded="true" />
+                <element signature="e#7680#7681#0" expanded="true" />
+                <element signature="e#7733#7734#0" expanded="true" />
+                <element signature="e#7911#7912#0" expanded="true" />
+                <element signature="e#7959#7960#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Customers.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/databaseConnection/Customers.java">
+      <file leaf-file-name="Bookings.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/databaseConnection/Bookings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="520">
+              <caret line="112" column="9" lean-forward="true" selection-start-line="112" selection-start-column="9" selection-end-line="112" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Fleet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/databaseConnection/Fleet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="54" column="31" lean-forward="false" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -184,19 +192,22 @@
       <file leaf-file-name="Payments.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/databaseConnection/Payments.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="574">
+              <caret line="97" column="5" lean-forward="true" selection-start-line="82" selection-start-column="1" selection-end-line="97" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bookings.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/databaseConnection/Bookings.java">
+      <file leaf-file-name="Motorhome.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/Motorhome.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1475">
-              <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="250">
+              <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+              <folding>
+                <element signature="e#5060#5061#0" expanded="true" />
+                <element signature="e#5108#5109#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -261,20 +272,20 @@
         <option value="$PROJECT_DIR$/src/view/bookkeeper.fxml" />
         <option value="$PROJECT_DIR$/src/view/salesman.fxml" />
         <option value="$PROJECT_DIR$/src/view/BookkeeperController.java" />
-        <option value="$PROJECT_DIR$/src/model/Motorhome.java" />
         <option value="$PROJECT_DIR$/src/model/Customer.java" />
         <option value="$PROJECT_DIR$/src/view/Mechanic.fxml" />
         <option value="$PROJECT_DIR$/src/view/MechanicController.java" />
-        <option value="$PROJECT_DIR$/src/view/Controller.java" />
         <option value="$PROJECT_DIR$/src/view/SceneManager.java" />
-        <option value="$PROJECT_DIR$/src/databaseConnection/Fleet.java" />
+        <option value="$PROJECT_DIR$/src/databaseConnection/DBConnector.java" />
+        <option value="$PROJECT_DIR$/src/view/SalesmanController.java" />
         <option value="$PROJECT_DIR$/src/model/Payment.java" />
-        <option value="$PROJECT_DIR$/src/model/Booking.java" />
+        <option value="$PROJECT_DIR$/src/view/Controller.java" />
         <option value="$PROJECT_DIR$/src/databaseConnection/Customers.java" />
         <option value="$PROJECT_DIR$/src/databaseConnection/Payments.java" />
-        <option value="$PROJECT_DIR$/src/databaseConnection/DBConnector.java" />
         <option value="$PROJECT_DIR$/src/databaseConnection/Bookings.java" />
-        <option value="$PROJECT_DIR$/src/view/SalesmanController.java" />
+        <option value="$PROJECT_DIR$/src/databaseConnection/Fleet.java" />
+        <option value="$PROJECT_DIR$/src/model/Booking.java" />
+        <option value="$PROJECT_DIR$/src/model/Motorhome.java" />
       </list>
     </option>
   </component>
@@ -286,9 +297,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-11" />
-    <option name="y" value="-11" />
-    <option name="width" value="1934" />
+    <option name="x" value="-10" />
+    <option name="y" value="2" />
+    <option name="width" value="1933" />
     <option name="height" value="1042" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -353,6 +364,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -884,7 +899,7 @@
       <workItem from="1495801974337" duration="15887000" />
       <workItem from="1495890463028" duration="20989000" />
       <workItem from="1496064306138" duration="9758000" />
-      <workItem from="1496077787473" duration="1490000" />
+      <workItem from="1496077787473" duration="9313000" />
     </task>
     <task id="LOCAL-00001" summary="Bookkeeper Menu connected to the controller">
       <created>1495151650246</created>
@@ -1005,14 +1020,21 @@
       <option name="project" value="LOCAL" />
       <updated>1496077880649</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="moved add methods to the LISTS. there are some compilers errors at the moment, we have to update the constructors in each add method">
+      <created>1496079364832</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1496079364832</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118484000" />
+    <option name="totallyTimeSpent" value="126307000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1934" height="1042" extended-state="0" />
+    <frame x="-10" y="2" width="1933" height="1042" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1030,8 +1052,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32410422" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1330076" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3112439" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24551874" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1105,7 +1127,8 @@
     <MESSAGE value="Connected the salesman FXML file" />
     <MESSAGE value="Codded a big part of the salesman's methods" />
     <MESSAGE value="connected to the remote database" />
-    <option name="LAST_COMMIT_MESSAGE" value="connected to the remote database" />
+    <MESSAGE value="moved add methods to the LISTS. there are some compilers errors at the moment, we have to update the constructors in each add method" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved add methods to the LISTS. there are some compilers errors at the moment, we have to update the constructors in each add method" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1338,14 +1361,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="64" column="54" lean-forward="false" selection-start-line="64" selection-start-column="54" selection-end-line="64" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/databaseConnection/Staff.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -1358,55 +1373,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="587">
           <caret line="47" column="84" lean-forward="false" selection-start-line="47" selection-start-column="84" selection-end-line="47" selection-end-column="84" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/view/MechanicController.java" />
-    <entry file="file://$PROJECT_DIR$/src/model/Motorhome.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="12" column="3" lean-forward="false" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1275#1276#0" expanded="false" />
-            <element signature="e#1305#1306#0" expanded="false" />
-            <element signature="e#1338#1339#0" expanded="false" />
-            <element signature="e#1372#1373#0" expanded="false" />
-            <element signature="e#1417#1418#0" expanded="false" />
-            <element signature="e#1445#1446#0" expanded="false" />
-            <element signature="e#1477#1478#0" expanded="false" />
-            <element signature="e#1511#1512#0" expanded="false" />
-            <element signature="e#1556#1557#0" expanded="false" />
-            <element signature="e#1584#1585#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1657#1658#0" expanded="false" />
-            <element signature="e#1708#1709#0" expanded="false" />
-            <element signature="e#1741#1742#0" expanded="false" />
-            <element signature="e#1767#1768#0" expanded="false" />
-            <element signature="e#1792#1793#0" expanded="false" />
-            <element signature="e#1825#1826#0" expanded="false" />
-            <element signature="e#1853#1854#0" expanded="false" />
-            <element signature="e#2411#2412#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/databaseConnection/Fleet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1475">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="37" selection-start-column="6" selection-end-line="68" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1035#1036#0" expanded="false" />
-            <element signature="e#1070#1071#0" expanded="false" />
-            <element signature="e#1111#1112#0" expanded="false" />
-            <element signature="e#1145#1146#0" expanded="false" />
-            <marker date="1496077767099" expanded="true" signature="2283:2568" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/view/BookkeeperController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1420,58 +1391,99 @@
     <entry file="dbDummy://dbtable:/aacfb615/11cd444a-a7f6-4ae0-a540-fd92bcb53967/nordicmotorhomes.costumer" />
     <entry file="file://$PROJECT_DIR$/src/model/Payment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="30" column="139" lean-forward="false" selection-start-line="30" selection-start-column="139" selection-end-line="30" selection-end-column="139" />
-          <folding />
+        <state relative-caret-position="350">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#2222#2223#0" expanded="true" />
+            <element signature="e#2254#2255#0" expanded="true" />
+            <element signature="e#2301#2302#0" expanded="true" />
+            <element signature="e#2343#2344#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Booking.java">
+    <entry file="file://$PROJECT_DIR$/src/view/SalesmanController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="28" column="4" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="725">
+          <caret line="134" column="5" lean-forward="true" selection-start-line="134" selection-start-column="5" selection-end-line="134" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/databaseConnection/Customers.java">
+    <entry file="file://$PROJECT_DIR$/src/view/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="377">
+          <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/databaseConnection/DBConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="137" column="5" lean-forward="false" selection-start-line="137" selection-start-column="5" selection-end-line="137" selection-end-column="5" />
+        <state relative-caret-position="274">
+          <caret line="66" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/databaseConnection/Bookings.java">
+    <entry file="file://$PROJECT_DIR$/src/databaseConnection/Customers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1475">
-          <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+        <state relative-caret-position="-650">
+          <caret line="31" column="104" lean-forward="false" selection-start-line="31" selection-start-column="104" selection-end-line="31" selection-end-column="104" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/databaseConnection/Payments.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+        <state relative-caret-position="574">
+          <caret line="97" column="5" lean-forward="true" selection-start-line="82" selection-start-column="1" selection-end-line="97" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/SalesmanController.java">
+    <entry file="file://$PROJECT_DIR$/src/databaseConnection/Fleet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3975">
-          <caret line="159" column="1" lean-forward="true" selection-start-line="159" selection-start-column="1" selection-end-line="159" selection-end-column="1" />
+        <state relative-caret-position="425">
+          <caret line="54" column="31" lean-forward="false" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/databaseConnection/Bookings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="112" column="9" lean-forward="true" selection-start-line="112" selection-start-column="9" selection-end-line="112" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Booking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="267" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="267" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#5401#5402#0" expanded="true" />
+            <element signature="e#5435#5436#0" expanded="true" />
+            <element signature="e#5486#5487#0" expanded="true" />
+            <element signature="e#5532#5533#0" expanded="true" />
+            <element signature="e#7680#7681#0" expanded="true" />
+            <element signature="e#7733#7734#0" expanded="true" />
+            <element signature="e#7911#7912#0" expanded="true" />
+            <element signature="e#7959#7960#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Motorhome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+          <folding>
+            <element signature="e#5060#5061#0" expanded="true" />
+            <element signature="e#5108#5109#0" expanded="true" />
           </folding>
         </state>
       </provider>

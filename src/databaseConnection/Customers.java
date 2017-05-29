@@ -25,6 +25,13 @@ public class Customers {
         return ourInstance;
     }
 
+
+    /**
+     *this is a private constructor, the whole idea of the singleton is based on this private constructor:
+     *the constructor can be called only be the ourInstance field, and its called only once per runtime.
+     * This constructor loads all the customers from the database to the Observable list theCustomerList.
+     * in case you are still in doubt call 0045 71587288
+     */
     private Customers(){
         DBConnector db = new DBConnector();
         try {
@@ -66,8 +73,7 @@ public class Customers {
 
             res = db.makeUpdate("INSERT INTO customers (customerid, name, email, title, telephone, dob) VALUES" +
                     " ('"+id+"','"+name+"','"+email+"','"+title+"','"+tel+"','"+dob+"')");
-            ObservableList<Customer> customerList = customers.getTheCustomerList();
-            if(res==1) customerList.add(newCustomer);
+            if(res==1) theCustomerList.add(newCustomer);
         } catch (Exception e ) {
             e.printStackTrace();
         }

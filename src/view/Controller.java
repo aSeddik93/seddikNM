@@ -1,6 +1,6 @@
 package view;
 
-import databaseConnection.Staff;
+import databaseConnection.*;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -46,7 +46,14 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //here we are going to make a call to all the singleton Lists
+        //the private constructor of each is gonna populate each List from the DB.
         Staff staff= new Staff();
+        Customers.getInstance();
+        Payments.getInstance();
+        Bookings.getInstance();
+        Fleet.getInstance();
+
 
     }
 

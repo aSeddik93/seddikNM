@@ -4,7 +4,9 @@ import databaseConnection.Bookings;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ADMIN on 24-05-2017.
@@ -26,11 +28,13 @@ public class Booking {
     private BooleanProperty extra2 = new SimpleBooleanProperty(this, "extra2", false);
     private BooleanProperty extra3 = new SimpleBooleanProperty(this, "extra3", false);
     private BooleanProperty extra4 = new SimpleBooleanProperty(this, "extra4", false);
-
+    private int customerId;
+    private int motorhomeId;
     private Motorhome bookedMotorhome = null;
+    private ArrayList<Payment> paymentList;
 
     public Booking(int id, String status, Double distance1, Double distance2, String startDate, String endDate,
-                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
+                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4, int customerId,int motorhomeId) {
         this.id = id;
         this.status.setValue(status);
         this.distance1.setValue(distance1);
@@ -41,11 +45,13 @@ public class Booking {
         this.extra2.setValue(extra2);
         this.extra3.setValue(extra3);
         this.extra4.setValue(extra4);
+        this.customerId=customerId;
+        this.motorhomeId=motorhomeId;
         setAmount(999);
     }
 
     public Booking(String status, Double distance1, Double distance2, LocalDate startDate, LocalDate endDate,
-                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
+                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4, int customerId,int motorhomeId) {
 
         this.status.setValue(status);
         this.distance1.setValue(distance1);
@@ -56,6 +62,8 @@ public class Booking {
         this.extra2.setValue(extra2);
         this.extra3.setValue(extra3);
         this.extra4.setValue(extra4);
+        this.customerId=customerId;
+        this.motorhomeId=motorhomeId;
         setAmount(999);
 
     }
@@ -189,6 +197,13 @@ public class Booking {
         || endDate.isBefore(getStartDate()) || endDate.isAfter(getEndDate()));
     }
 
+    public int getMotorhomeId() {
+        return motorhomeId;
+    }
+
+    public void setMotorhomeId(int motorhomeId) {
+        this.motorhomeId = motorhomeId;
+    }
 
     private void setListeners() {
 
@@ -231,6 +246,23 @@ public class Booking {
                 });
     }
 
+    /**
+     * this method is called by the Bookings singleton,
+     * whenever we launch the app, all bookings are loaded from the DB
+     * and constructed by the Bookings.
+     * Payments singleton is already constructed,
+     * so by iterating we get a list of all relevant for this Booking payments.
+     *
+     */
+    public void setPaymentList(ArrayList<Payment> paymentsOfTheBooking) {
+        this.paymentList=paymentsOfTheBooking;
+    }
 
-
+      /**
+     * to be used later
+     * @param newPayment latest payment to be added to the Booking's list of Payments.
+     */
+    public void addPayment(Payment newPayment){
+        this.paymentList.add(newPayment);
+    }
 }
