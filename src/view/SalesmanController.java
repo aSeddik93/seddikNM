@@ -121,13 +121,13 @@ public class SalesmanController implements Initializable {
     public void bookOnAction(ActionEvent event) throws IOException {
         if (event.getSource().equals(book)) {
 
-            db.addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),999);
+            Payments.getInstance().addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),999);
 
-            db.addBooking(bookings,"Booked", Double.parseDouble(newPickUp.getText()), Double.parseDouble(newDropOff.getText()),
+            Bookings.getInstance().addBooking(bookings,"Booked", Double.parseDouble(newPickUp.getText()), Double.parseDouble(newDropOff.getText()),
                     PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(),picnic.isSelected(),chairs.isSelected()
             );
 
-            db.addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
+            Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
 
         }
 
@@ -146,7 +146,7 @@ public class SalesmanController implements Initializable {
             motorhomeBrand.setCellFactory(TextFieldTableCell.forTableColumn());
             motorhomePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
             availablemotorhomes.setItems(available);
-            System.out.println("WE ARE HERREEE!!!");
+            System.out.println("WE ARE HERREEE!!!");  //TODO remove heheheh
             for(Motorhome m : available){
 
                 System.out.println(m.getId());

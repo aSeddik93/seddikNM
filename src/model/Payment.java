@@ -11,22 +11,24 @@ public class Payment {
     private String cardHolder;
     private int cardCVC;
     private String cardExpiry;
+    private int bookingId;
 
 
 
     private double amount;
 
-    public Payment(String cardType, String cardNumber, String cardHolder, String cardCVC, String cardExpiry, double amount) {
+    public Payment(String cardType, String cardNumber, String cardHolder, String cardCVC, String cardExpiry, double amount, int bookingId) {
         this.cardType = cardType;
         this.cardNumber = Integer.parseInt(cardNumber);
         this.cardHolder = cardHolder;
         this.cardCVC = Integer.parseInt(cardCVC);
         this.cardExpiry = cardExpiry;
         this.amount = amount;
+        this.bookingId=bookingId;
 
     }
 
-    public Payment(int id, String cardType, int cardNumber, String cardHolder, int cardCVC, String cardExpiry, double amount) {
+    public Payment(int id, String cardType, int cardNumber, String cardHolder, int cardCVC, String cardExpiry, double amount, int bookingId) {
         this.id = id;
         this.cardType = cardType;
         this.cardNumber = cardNumber;
@@ -34,6 +36,7 @@ public class Payment {
         this.cardCVC = cardCVC;
         this.cardExpiry = cardExpiry;
         this.amount = amount;
+        this.bookingId=bookingId;
     }
 
     public int getId() {

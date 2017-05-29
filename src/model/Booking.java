@@ -26,6 +26,7 @@ public class Booking {
     private BooleanProperty extra2 = new SimpleBooleanProperty(this, "extra2", false);
     private BooleanProperty extra3 = new SimpleBooleanProperty(this, "extra3", false);
     private BooleanProperty extra4 = new SimpleBooleanProperty(this, "extra4", false);
+
     private Motorhome bookedMotorhome = null;
 
     public Booking(int id, String status, Double distance1, Double distance2, String startDate, String endDate,
