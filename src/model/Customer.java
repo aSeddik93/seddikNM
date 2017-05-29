@@ -5,6 +5,7 @@ import databaseConnection.Customers;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by Antonia on 19-05-2017.
@@ -18,16 +19,17 @@ public class Customer {
     private ObjectProperty<LocalDate> dob = new SimpleObjectProperty<>(this, "dob", null);
     private IntegerProperty tel = new SimpleIntegerProperty(this, "tel", -1);
 
+    private List<Booking> customerBookings = null;
+
     private int id;
 
-    public Customer(String title, String name, String email,String dob, int tel) {
+    public Customer(String title, String name, String email,LocalDate dob, String tel) {
         this.title.setValue(title);
         this.name.setValue(name);
         this.email.setValue(email);
-        this.dob.setValue(LocalDate.parse(dob));
-        this.tel.setValue(tel);
+        this.dob.setValue(dob);
+        this.tel.setValue(Integer.parseInt(tel));
         setListeners();
-        this.id = 0;
     }
 
     public Customer(String title, String name, String email,String dob, int tel, int id) {

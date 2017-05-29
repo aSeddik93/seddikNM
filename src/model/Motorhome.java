@@ -3,6 +3,10 @@ package model;
 import databaseConnection.DBConnector;
 import databaseConnection.Fleet;
 import javafx.beans.property.*;
+import javafx.collections.ObservableList;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by ADMIN on 19-05-2017.
@@ -12,6 +16,8 @@ public class Motorhome {
     private StringProperty brand = new SimpleStringProperty(this,"brand","unknown");
     private DoubleProperty price= new SimpleDoubleProperty(this, "price",0);
     private IntegerProperty nbrPersons = new SimpleIntegerProperty(this, "nbrPersons",0);
+    private ObservableList<Booking> bookingList = null;
+    private String status;
 
 
     private int id;
@@ -75,6 +81,36 @@ public class Motorhome {
     public void setId(int id) {
         this.id = id;
     }
+
+    public boolean checkAvailability(int capacity, LocalDate startDate, LocalDate endDate) {
+
+
+        if(!checkCapacity(capacity)) {
+            System.out.println("WHAT'S UP2");
+            return false;
+        }
+
+        if(bookingList == null) {
+            return true;
+        }
+
+        for(Booking b : bookingList) {
+
+            if(!b.isWithinRange(startDate,endDate)) {
+                System.out.println("WHAT'S UP3");
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    boolean checkCapacity(int capacity) {
+        return ((capacity == getNbrPersons()));
+    }
+
+
 
 
     /**

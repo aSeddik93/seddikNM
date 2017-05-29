@@ -4,6 +4,7 @@ import databaseConnection.Bookings;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by ADMIN on 24-05-2017.
@@ -11,6 +12,10 @@ import java.time.LocalDate;
 public class Booking {
 
     private int id;
+
+
+
+    private double amount;
 
     private StringProperty status = new SimpleStringProperty(this, "title", "unknown");
     private DoubleProperty distance1 = new SimpleDoubleProperty(this, "distance1", -1);
@@ -21,7 +26,7 @@ public class Booking {
     private BooleanProperty extra2 = new SimpleBooleanProperty(this, "extra2", false);
     private BooleanProperty extra3 = new SimpleBooleanProperty(this, "extra3", false);
     private BooleanProperty extra4 = new SimpleBooleanProperty(this, "extra4", false);
-    private Customer customer;
+    private Motorhome bookedMotorhome = null;
 
     public Booking(int id, String status, Double distance1, Double distance2, String startDate, String endDate,
                    Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
@@ -35,19 +40,22 @@ public class Booking {
         this.extra2.setValue(extra2);
         this.extra3.setValue(extra3);
         this.extra4.setValue(extra4);
+        setAmount(999);
     }
 
-    public Booking(String status, Double distance1, Double distance2, String startDate, String endDate,
+    public Booking(String status, Double distance1, Double distance2, LocalDate startDate, LocalDate endDate,
                    Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
+
         this.status.setValue(status);
         this.distance1.setValue(distance1);
         this.distance2.setValue(distance2);
-        this.startDate.setValue(LocalDate.parse(startDate));
-        this.startDate.setValue(LocalDate.parse(endDate));
+        this.startDate.setValue(startDate);
+        this.startDate.setValue(endDate);
         this.extra1.setValue(extra1);
         this.extra2.setValue(extra2);
         this.extra3.setValue(extra3);
         this.extra4.setValue(extra4);
+        setAmount(999);
 
     }
 
@@ -167,6 +175,20 @@ public class Booking {
         this.extra4.set(extra4);
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    boolean isWithinRange(LocalDate startDate, LocalDate endDate) {
+        return !(startDate.isBefore(getStartDate()) || startDate.isAfter(getEndDate())
+        || endDate.isBefore(getStartDate()) || endDate.isAfter(getEndDate()));
+    }
+
+
     private void setListeners() {
 
         status.addListener(
@@ -207,5 +229,7 @@ public class Booking {
                     Bookings.getInstance().updateBookings(this, "extra4", newValue.toString());
                 });
     }
+
+
 
 }

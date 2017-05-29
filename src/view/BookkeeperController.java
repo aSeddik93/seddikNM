@@ -11,6 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import model.Booking;
 import model.Customer;
 import model.Motorhome;
@@ -79,10 +81,12 @@ public class BookkeeperController implements Initializable {
 
         motorhomesTable.setEditable(true);
         nbrPersons.setCellValueFactory(new PropertyValueFactory<>("nbrPersons"));
+        nbrPersons.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         motorhomeId.setCellValueFactory(new PropertyValueFactory<>("id"));
         motorhomeBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         motorhomeBrand.setCellFactory(TextFieldTableCell.forTableColumn());
         motorhomePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        motorhomePrice.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         motorhomesTable.setItems(motorhomeList);
         //disables the delete button when there is nothing selected
         motorhomesTable.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {

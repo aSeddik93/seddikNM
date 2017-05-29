@@ -1,9 +1,14 @@
 package databaseConnection;
 
 import javafx.collections.ObservableList;
+import model.Booking;
+import model.Customer;
 import model.Motorhome;
+import model.Payment;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * This class can be used whenever we need a connection to the Database
@@ -130,6 +135,76 @@ public class DBConnector {
         }
         closeConnection();
         return false;
+    }
+
+    public boolean addBooking(Bookings bookings, String status, Double distance1, Double distance2, LocalDate startDate, LocalDate endDate,
+                               Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4) {
+        int res = 0;
+        try {
+            ResultSet getId=makeQuery("select max(id) from bookings");
+            getId.next();
+            int id=getId.getInt(1)+1;
+            System.out.println(id);
+            Booking newBooking= new Booking(status, distance1, distance2, startDate, endDate,
+                    extra1, extra2, extra3, extra4);
+            newBooking.setId(id);
+            int ex1 = 0, ex2 = 0, ex3 = 0, ex4 =0 ;
+
+            if (extra1 == true) { ex1 = 1;}
+            if (extra2 == true) { ex2 = 1;}
+            if (extra3 == true) { ex3 = 1;}
+            if (extra4 == true) { ex4 = 1;}
+            res = makeUpdate("INSERT INTO bookings (id, startDate, endDate, distance1, distance2, extra1,extra2,extra3,extra4,status) VALUES" +
+                    " ('"+id+"','"+startDate+"','"+endDate+"','"+distance1+"','"+distance2+"','"+ex1+"','"+ex2+"','"+ex3+"','"+ex4+"','"+status+"')");
+            ObservableList<Booking> bookingList = bookings.getTheBookingList();
+            if(res==1) bookingList.add(newBooking);
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
+        return res==1;
+    }
+
+    public boolean addPayment(Payments payments, String cardType, String cardNumber, String cardHolder, String cardCVC, String cardExpiry, double amount) {
+        int res = 0;
+        try {
+            ResultSet getId=makeQuery("select max(id) from payments");
+            getId.next();
+            int id=getId.getInt(1)+1;
+            System.out.println(id);
+            Payment newPayment= new Payment(cardType, cardNumber, cardHolder, cardCVC, cardExpiry, amount);
+            newPayment.setId(id);
+            res = makeUpdate("INSERT INTO payments (id,cardtype,cardnumber,cardcvc,cardholder,cardexpiry,amount) VALUES" +
+                    " ('"+id+"','"+cardType+"','"+cardNumber+"','"+cardCVC+"','"+cardHolder+"','"+cardExpiry+"','"+amount+"')");
+            List<Payment> paymentList = payments.getPaymentList();
+            if(res==1) paymentList.add(newPayment);
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
+        return res==1;
+    }
+
+
+
+
+
+   public boolean addCustomer(Customers customers, String title, String name, String email,LocalDate dob, String tel) {
+        int res = 0;
+        try {
+            ResultSet getId=makeQuery("select max(id) from customers");
+            getId.next();
+            int id=getId.getInt(1)+1;
+            System.out.println(id);
+            Customer newCustomer= new Customer(title, name, email, dob, tel);
+            newCustomer.setId(id);
+
+            res = makeUpdate("INSERT INTO customers (id, name, email, title, telephone, dob) VALUES" +
+                    " ('"+id+"','"+name+"','"+email+"','"+title+"','"+tel+"','"+dob+"')");
+            ObservableList<Customer> customerList = customers.getTheCustomerList();
+            if(res==1) customerList.add(newCustomer);
+        } catch (Exception e ) {
+            e.printStackTrace();
+        }
+        return res==1;
     }
 
 
