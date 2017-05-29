@@ -83,11 +83,11 @@ public class DBConnector {
      * have a look at this for more info : https://docs.oracle.com/javase/7/docs/api/java/sql/Connection.html
      */
     private Connection getConnection(){
-        String url = "jdbc:mysql://localhost:3306/";
+        String url = "jdbc:mysql://volatilemercurycopenhagen.crkv1yx1tdak.us-east-1.rds.amazonaws.com:3306/";
         String dbName = "nordicmotorhomes";
         String driver = "com.mysql.jdbc.Driver";
-        String userName = "root";
-        String password = "";
+        String userName = "agelastostefanos";
+        String password = "stef1987";
         try {
             Class.forName(driver).newInstance();
         } catch (InstantiationException e) {
