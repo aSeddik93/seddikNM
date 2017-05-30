@@ -13,9 +13,12 @@ import javafx.scene.input.MouseEvent;
 import model.Booking;
 import model.Customer;
 import model.Motorhome;
+import model.Payment;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -40,7 +43,9 @@ public class SalesmanController implements Initializable {
     private ObservableList<Booking> bookingList = bookings.getTheBookingList();
     private Customers customers = Customers.getInstance();
     private ObservableList<Customer> customerList = customers.getTheCustomerList();
-    private Payments payments = new Payments();
+    private Payments payments = Payments.getInstance();
+    private List<Payment> PaymentList = payments.getPaymentList();
+
 
     private final String capacity[] = {"2", "4", "6", "8"};
     private final String titles[] = {"Mr", "Ms", "Mrs"};
@@ -121,13 +126,18 @@ public class SalesmanController implements Initializable {
     public void bookOnAction(ActionEvent event) throws IOException {
         if (event.getSource().equals(book)) {
 
-            Payments.getInstance().addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),999);
+            int customerid = Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
+            int motorhomeid = availablemotorhomes.getSelectionModel().getSelectedItem().getId();
+            int bookingid = Bookings.getInstance().addBooking(bookings,"Booked", Double.parseDouble(newPickUp.getText()), Double.parseDouble(newDropOff.getText()),
+                    PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(),picnic.isSelected(),chairs.isSelected(),
+                    motorhomeid, customerid);
+            int paymentid = Payments.getInstance().addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),999,bookingid);
 
-            Bookings.getInstance().addBooking(bookings,"Booked", Double.parseDouble(newPickUp.getText()), Double.parseDouble(newDropOff.getText()),
-                    PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(),picnic.isSelected(),chairs.isSelected()
-            );
+            Booking newBooking = bookings.searchBooking(bookingid);
+            Payment newPayment = payments.searchPayment(paymentid);
 
-            Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
+            fleet.addBookingtToBookedMotorhome(motorhomeid,newBooking);
+            bookings.addPaymentToNewBooking(bookingid,newPayment);
 
         }
 
@@ -136,6 +146,8 @@ public class SalesmanController implements Initializable {
 
     public void searchAvailable(ActionEvent event) {
         if (event.getSource().equals(search)) {
+
+            availablemotorhomes.getItems().clear();
 
             ObservableList<Motorhome> available = availableMotorhomes(Integer.parseInt(numberOfPersons.getValue()),
                     PickUpDate.getValue(), DropOffDate.getValue());
@@ -151,8 +163,6 @@ public class SalesmanController implements Initializable {
 
                 System.out.println(m.getId());
             }
-
-
 
         }
     }

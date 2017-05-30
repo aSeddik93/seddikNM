@@ -3,6 +3,7 @@ package model;
 import databaseConnection.DBConnector;
 import databaseConnection.Fleet;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
@@ -17,8 +18,10 @@ public class Motorhome {
     private StringProperty brand = new SimpleStringProperty(this,"brand","unknown");
     private DoubleProperty price= new SimpleDoubleProperty(this, "price",0);
     private IntegerProperty nbrPersons = new SimpleIntegerProperty(this, "nbrPersons",0);
-    private ObservableList<Booking> bookingList = null;
+    private ObservableList<Booking> bookingList = FXCollections.observableArrayList();
     private String status;
+
+
     private int id;
 
     /**
@@ -105,9 +108,16 @@ public class Motorhome {
 
     }
 
-    boolean checkCapacity(int capacity) {
+    public void addBookingToMotorhome (Booking b) {
+
+        bookingList.add(b);
+    }
+
+    private boolean checkCapacity(int capacity) {
         return ((capacity == getNbrPersons()));
     }
+
+
 
 
 
@@ -157,7 +167,8 @@ public class Motorhome {
         //here we get an ArrayList but the destination is an ObservableList,
         //so we pass the ArrayList (which implements the Collection Interface)
         //to the method addAll() of the ObservableList which can receive a Collection.
-        bookingList.addAll(bookingsOfThisMotorhome);
+            bookingList.addAll(bookingsOfThisMotorhome);
+
     }
 
     /**

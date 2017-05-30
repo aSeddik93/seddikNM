@@ -5,6 +5,7 @@ import databaseConnection.Customers;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class Customer {
     private ObjectProperty<LocalDate> dob = new SimpleObjectProperty<>(this, "dob", null);
     private IntegerProperty tel = new SimpleIntegerProperty(this, "tel", -1);
 
-    private List<Booking> customerBookings = null;
+    private List<Booking> customerBookings = new ArrayList<>();
 
     private int id;
 

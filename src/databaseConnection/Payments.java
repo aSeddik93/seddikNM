@@ -25,12 +25,7 @@ public class Payments {
         return ourInstance;
     }
 
-    /**
-     *this is a private constructor, the whole idea of the singleton is based on this private constructor:
-     *the constructor can be called only be the ourInstance field, and its called only once per runtime.
-     * This constructor loads all the Payments from the database to the Observable list thePaymentList.
-     * in case you are still in doubt call 0045 71587288
-     */
+
     private Payments(){
         DBConnector db = new DBConnector();
         try {
@@ -60,7 +55,7 @@ public class Payments {
         }
     }
 
-    public boolean addPayment(Payments payments, String cardType, String cardNumber, String cardHolder, String cardCVC, String cardExpiry, double amount,int bookingId){
+    public int addPayment(Payments payments, String cardType, String cardNumber, String cardHolder, String cardCVC, String cardExpiry, double amount, int bookingid) {
         int res = 0;
         try {
             DBConnector db = new DBConnector();
@@ -68,32 +63,27 @@ public class Payments {
             getId.next();
             int id=getId.getInt(1)+1;
             System.out.println(id);
-            Payment newPayment= new Payment(cardType, cardNumber, cardHolder, cardCVC, cardExpiry, amount,bookingId);
-            newPayment.setId(id);
+            Payment newPayment= new Payment(id,cardType, cardNumber, cardHolder, cardCVC, cardExpiry, amount,bookingid);
             res = db.makeUpdate("INSERT INTO payments (paymentid,cardtype,cardnumber,cardcvc,cardholder,cardexpiry,amount,bookingid) VALUES" +
-                    " ('"+id+"','"+cardType+"','"+cardNumber+"','"+cardCVC+"','"+cardHolder+"','"+cardExpiry+"','"+amount+"','"+bookingId+"')");
+                    " ('"+id+"','"+cardType+"','"+cardNumber+"','"+cardCVC+"','"+cardHolder+"','"+cardExpiry+"','"+amount+"','"+bookingid+"')");
             List<Payment> paymentList = payments.getPaymentList();
             if(res==1) paymentList.add(newPayment);
+            return id;
         } catch (Exception e ) {
             e.printStackTrace();
         }
-        return res==1;
+        return -1;
     }
 
-    /**
-     * this method iterates through thePaymentList and looks for payments that
-     * are relevant to a booking id.
-     * @param bookingId a valid id of a Booking
-     * @return a List of all the payments that their bookingId field is equal to the parameter passed.
-     * in case you are still in doubt call 0045 71587288
-     */
-    public ArrayList<Payment> getPaymentsOfBooking(int bookingId) {
-        ArrayList<Payment> listOfRelevantPayments = new ArrayList<>();
-        for(Payment p: paymentList){
-            if(p.getBookingId()==bookingId){
-                listOfRelevantPayments.add(p);
+    public Payment searchPayment(int paymentid) {
+
+        for(Payment p : getPaymentList()) {
+            if(p.getId() == paymentid) {
+                return p;
             }
         }
-        return listOfRelevantPayments;
+        return null;
     }
+
+
 }

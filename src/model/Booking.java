@@ -2,6 +2,7 @@ package model;
 
 import databaseConnection.Bookings;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,13 +29,16 @@ public class Booking {
     private BooleanProperty extra2 = new SimpleBooleanProperty(this, "extra2", false);
     private BooleanProperty extra3 = new SimpleBooleanProperty(this, "extra3", false);
     private BooleanProperty extra4 = new SimpleBooleanProperty(this, "extra4", false);
-    private int customerId;
-    private int motorhomeId;
+
+    private int customerid;
+    private int motorhomeid;
     private Motorhome bookedMotorhome = null;
-    private ArrayList<Payment> paymentList;
+    private ArrayList<Payment> paymentList = new ArrayList<>();
+
+
 
     public Booking(int id, String status, Double distance1, Double distance2, String startDate, String endDate,
-                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4, int customerId,int motorhomeId) {
+                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4, int motorhomeid, int customerid) {
         this.id = id;
         this.status.setValue(status);
         this.distance1.setValue(distance1);
@@ -45,14 +49,15 @@ public class Booking {
         this.extra2.setValue(extra2);
         this.extra3.setValue(extra3);
         this.extra4.setValue(extra4);
-        this.customerId=customerId;
-        this.motorhomeId=motorhomeId;
+        this.customerid = customerid;
+        this.motorhomeid = motorhomeid;
         setAmount(999);
+
     }
 
-    public Booking(String status, Double distance1, Double distance2, LocalDate startDate, LocalDate endDate,
-                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4, int customerId,int motorhomeId) {
-
+    public Booking(int id, String status, Double distance1, Double distance2, LocalDate startDate, LocalDate endDate,
+                   Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4, int motorhomeid, int customerid) {
+        this.id = id;
         this.status.setValue(status);
         this.distance1.setValue(distance1);
         this.distance2.setValue(distance2);
@@ -62,10 +67,14 @@ public class Booking {
         this.extra2.setValue(extra2);
         this.extra3.setValue(extra3);
         this.extra4.setValue(extra4);
-        this.customerId=customerId;
-        this.motorhomeId=motorhomeId;
+        this.customerid = customerid;
+        this.motorhomeid = motorhomeid;
         setAmount(999);
 
+    }
+
+    public void addPaymentToBoking(Payment p) {
+        paymentList.add(p);
     }
 
     public int getId() {
@@ -193,16 +202,18 @@ public class Booking {
     }
 
     boolean isWithinRange(LocalDate startDate, LocalDate endDate) {
-        return !(startDate.isBefore(getStartDate()) || startDate.isAfter(getEndDate())
-        || endDate.isBefore(getStartDate()) || endDate.isAfter(getEndDate()));
+        return (startDate.isBefore(getStartDate()) && endDate.isBefore(getStartDate())) ||
+                (startDate.isAfter(getEndDate()) && endDate.isAfter(getEndDate()));
+
+
     }
 
     public int getMotorhomeId() {
-        return motorhomeId;
+        return motorhomeid;
     }
 
     public void setMotorhomeId(int motorhomeId) {
-        this.motorhomeId = motorhomeId;
+        this.motorhomeid = motorhomeId;
     }
 
     private void setListeners() {
@@ -258,7 +269,7 @@ public class Booking {
         this.paymentList=paymentsOfTheBooking;
     }
 
-      /**
+    /**
      * to be used later
      * @param newPayment latest payment to be added to the Booking's list of Payments.
      */
@@ -266,3 +277,7 @@ public class Booking {
         this.paymentList.add(newPayment);
     }
 }
+
+
+
+

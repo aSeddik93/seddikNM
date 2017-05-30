@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Booking;
 import model.Motorhome;
+import model.Payment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,7 +53,7 @@ public class Fleet {
                 //find all relevant Booking Objects from the Bookings singleton
                 ArrayList<Booking> bookingsOfThisMotorhome= Bookings.getInstance().getPaymentsOfBooking(motorhomeId);
                 //add ArrayList of relevant Bookings to the Motorhome
-                toAdd.setBookingList(bookingsOfThisMotorhome);
+                    toAdd.setBookingList(bookingsOfThisMotorhome);
                 //add Booking to the Bookings ObservableList.
                 theFleetList.add(toAdd);
             }
@@ -76,4 +77,15 @@ public class Fleet {
         }
     }
 
+    public void addBookingtToBookedMotorhome(int id, Booking booking) {
+
+        for(Motorhome m : getTheFleetList()) {
+
+            if(m.getId() == id) {
+
+                m.addBookingToMotorhome(booking);
+            }
+        }
+
+    }
 }
