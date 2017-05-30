@@ -85,5 +85,15 @@ public class Payments {
         return null;
     }
 
+    public ArrayList<Payment> getPaymentsOfBooking(int bookingid) {
+        ArrayList<Payment> listOfRelevantPayments = new ArrayList<>();
+        for(Payment p: getPaymentList()){
+            if(p.getBookingId() == bookingid){
+                listOfRelevantPayments.add(p);
+            }
+        }
+        return listOfRelevantPayments;
+    }
+
 
 }

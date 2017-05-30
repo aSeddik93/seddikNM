@@ -1,10 +1,13 @@
 package model;
 
 import databaseConnection.Bookings;
+import databaseConnection.DBConnector;
 import databaseConnection.Fleet;
+import databaseConnection.Payments;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,8 +36,8 @@ public class Booking {
 
     private int customerid;
     private int motorhomeid;
-    private Motorhome bookedMotorhome = null;
     private ArrayList<Payment> paymentList = new ArrayList<>();
+
 
 
 
@@ -205,6 +208,39 @@ public class Booking {
     boolean isWithinRange(LocalDate startDate, LocalDate endDate) {
         return (startDate.isBefore(getStartDate()) && endDate.isBefore(getStartDate())) ||
                 (startDate.isAfter(getEndDate()) && endDate.isAfter(getEndDate()));
+
+
+    }
+
+    public ArrayList<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void addInspectionPayment(Double kmDriven, Boolean fuel){
+        DBConnector db = new DBConnector();
+        double incpectionPrice = 0;
+        if(kmDriven > 400) {incpectionPrice += (kmDriven - 400);}
+        if (fuel) {incpectionPrice += 70;}
+        System.out.println(paymentList.get(0).getCardNumber());
+        int cardCVC = paymentList.get(paymentList.size() - 1).getCardCVC();
+        String cardExpiry = paymentList.get(paymentList.size() - 1).getCardExpiry();
+        String cardHolder = paymentList.get(paymentList.size() - 1).getCardHolder();
+        int cardNumber = paymentList.get(paymentList.size() - 1).getCardNumber();
+        String cardType = paymentList.get(paymentList.size() - 1).getCardType();
+        try {
+            ResultSet getId =db.makeQuery("select max(paymentid) from payments");
+            getId.next();
+            int id =getId.getInt(1)+1;
+
+
+            db.makeUpdate("INSERT INTO payments (paymentid,cardtype,cardnumber,cardcvc,cardholder,cardexpiry,amount,bookingid) VALUES" +
+                    " ('"+id+"','"+cardType+"','"+cardNumber+"','"+cardCVC+"','"+cardHolder+"','"+cardExpiry+"','"+incpectionPrice+"','"+getId()+"')");
+            addPayment(new Payment(id,cardType,cardNumber,cardHolder,cardCVC, cardExpiry, incpectionPrice,getId()));
+        }
+        catch (Exception e ) {
+        e.printStackTrace();
+        }
+
 
 
     }

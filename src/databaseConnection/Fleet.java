@@ -4,13 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Booking;
 import model.Motorhome;
-import model.Payment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class is a singleton, meaning there can be only one instance of this class during runtime.
@@ -51,9 +48,9 @@ public class Fleet {
                 //construct Motorhome object with data from the DB.
                 int motorhomeId=result.getInt("motorhomeid");
                 Motorhome toAdd= new Motorhome(result.getString("brand"),result.getDouble("price"),
-                        result.getInt("capacity"),motorhomeId);
+                        result.getInt("capacity"),motorhomeId,result.getString("status"));
                 //find all relevant Booking Objects from the Bookings singleton
-                ArrayList<Booking> bookingsOfThisMotorhome= Bookings.getInstance().getPaymentsOfBooking(motorhomeId);
+                ArrayList<Booking> bookingsOfThisMotorhome= Bookings.getInstance().getBookingsOfMotorhome(motorhomeId);
                 //add ArrayList of relevant Bookings to the Motorhome
                     toAdd.setBookingList(bookingsOfThisMotorhome);
                 //add Booking to the Bookings ObservableList.
@@ -72,7 +69,7 @@ public class Fleet {
     public void updateMotorhome(Motorhome toUpdate, String column, String newValue){
         DBConnector db = new DBConnector();
         try {
-            db.makeUpdate("UPDATE motorhome SET "+column+"='"+newValue+"' WHERE id="+toUpdate.getId());
+            db.makeUpdate("UPDATE motorhome SET "+column+"='"+newValue+"' WHERE motorhomeid="+toUpdate.getId());
         } catch (SQLException e) {
             e.printStackTrace();
             //TODO handle it properly
@@ -104,6 +101,32 @@ public class Fleet {
         return rentedOut;
     }
 
+    public ObservableList<Motorhome> seUnderInspectionMotorhomeList() {
+
+        ObservableList<Motorhome> underInspection = FXCollections.observableArrayList();
+        for (Motorhome m : getTheFleetList())
+        {
+            if (m.isUnderInspection()) {
+                underInspection.add(m);
+            }
+        }
+
+        return underInspection;
+    }
+
+    public ObservableList<Motorhome> seOutOfOrderMotorhomeList() {
+
+        ObservableList<Motorhome> outOfOrder = FXCollections.observableArrayList();
+        for (Motorhome m : getTheFleetList())
+        {
+            if (m.isOutOfOrder()) {
+                outOfOrder.add(m);
+            }
+        }
+
+        return outOfOrder;
+    }
+
     public Motorhome searchById(int motorhomeid) {
         for(Motorhome m: theFleetList){
             if(m.getId()==motorhomeid){
@@ -111,5 +134,16 @@ public class Fleet {
             }
         }
         return null;
+    }
+
+    public int getIndexOfActualMotorhome(int motorhomeid){
+        for(Motorhome m : getTheFleetList()) {
+            if(m.getId() == motorhomeid)
+            {
+                return getTheFleetList().indexOf(m);
+            }
+        }
+
+        return -1;
     }
 }

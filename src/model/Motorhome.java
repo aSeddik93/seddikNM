@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by ADMIN on 19-05-2017.
@@ -18,6 +19,11 @@ public class Motorhome {
     private StringProperty brand = new SimpleStringProperty(this,"brand","unknown");
     private DoubleProperty price= new SimpleDoubleProperty(this, "price",0);
     private IntegerProperty nbrPersons = new SimpleIntegerProperty(this, "nbrPersons",0);
+
+    public ObservableList<Booking> getBookingList() {
+        return bookingList;
+    }
+
     private ObservableList<Booking> bookingList = FXCollections.observableArrayList();
     private String status;
 
@@ -41,14 +47,23 @@ public class Motorhome {
         setListeners();
     }
 
+    public Motorhome(String brand, double price, int nbrPersons, String status) {
+        this.brand.setValue(brand);
+        this.price.setValue(price);
+        this.nbrPersons.setValue(nbrPersons);
+        this.status = status;
+        setListeners();
+    }
+
     /**
      * this is the constructor
      */
-    public Motorhome(String brand, double price, int nbrPersons, int id) {
+    public Motorhome(String brand, double price, int nbrPersons, int id,String status) {
         this.brand.setValue(brand);
         this.price.setValue(price);
         this.nbrPersons.setValue(nbrPersons);
         this.id = id;
+        this.status = status;
         setListeners();
     }
     /**
@@ -119,7 +134,7 @@ public class Motorhome {
 
         for (Booking b : bookingList) {
 
-            return b.dropOffToday();
+            return b.dropOffToday() && (Objects.equals(getStatus(), "RentedOutmechanic"));
         }
 
         return false;
@@ -136,9 +151,18 @@ public class Motorhome {
         return ((capacity == getNbrPersons()));
     }
 
+    public boolean isUnderInspection() {return Objects.equals(getStatus(), "UnderIncpection");}
 
+    public boolean isOutOfOrder() {return Objects.equals(getStatus(), "OutOfOrder");}
 
-
+    public int getIndexOfActualBooking() {
+        for(Booking b : bookingList) {
+            if (b.isBookedNow()) {
+                return bookingList.indexOf(b);
+            }
+        }
+        return -1;
+    }
 
 
     /**

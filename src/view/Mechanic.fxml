@@ -2,11 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -74,30 +76,33 @@
                                                 <TableColumn fx:id="motorhomeid1" prefWidth="218.0" text="MotorHome id" />
                                             </columns>
                                         </TableView>
-                                        <Button fx:id="pass" layoutX="354.0" layoutY="44.0" mnemonicParsing="false" onAction="#passButton" prefHeight="43.0" prefWidth="103.0" text="Pass">
+                                        <Button fx:id="pass" layoutX="261.0" layoutY="155.0" mnemonicParsing="false" onAction="#passButton" prefHeight="43.0" prefWidth="103.0" text="Pass">
                                             <font>
                                                 <Font name="System Bold" size="13.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="fail" layoutX="353.0" layoutY="152.0" mnemonicParsing="false" onAction="#failButton" prefHeight="45.0" prefWidth="105.0" text="Fail">
+                                        <Button fx:id="fail" layoutX="430.0" layoutY="154.0" mnemonicParsing="false" onAction="#failButton" prefHeight="45.0" prefWidth="105.0" text="Fail">
                                             <font>
                                                 <Font name="System Bold" size="13.0" />
                                             </font>
                                         </Button>
+                              <TextField fx:id="kmdriven" layoutX="260.0" layoutY="69.0" prefHeight="39.0" prefWidth="104.0" />
+                              <Label layoutX="268.0" layoutY="34.0" prefHeight="27.0" prefWidth="88.0" text="KM Driven" />
+                              <CheckBox fx:id="fuel" layoutX="412.0" layoutY="75.0" mnemonicParsing="false" text="Fuel Under Half" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
-                        <Tab text="Under Repair">
+                        <Tab text="Out Of Order">
                             <content>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <TableView fx:id="UnderRepair" layoutX="-5.0" prefHeight="258.0" prefWidth="332.0">
+                                        <TableView fx:id="OutOfOrder" layoutX="-5.0" prefHeight="258.0" prefWidth="332.0">
                                             <columns>
                                                 <TableColumn fx:id="motorhomeid2" prefWidth="123.0" text="MotorHome id" />
                                                 <TableColumn fx:id="comments" prefWidth="208.0" text="Comments" />
                                             </columns>
                                         </TableView>
-                                        <Button fx:id="pass2" layoutX="466.0" layoutY="191.0" mnemonicParsing="false" onAction="#passButton2" prefHeight="45.0" prefWidth="105.0" text="Pass">
+                                        <Button fx:id="repaired" layoutX="409.0" layoutY="107.0" mnemonicParsing="false" onAction="#passButton2" prefHeight="45.0" prefWidth="105.0" text="Repaired">
                                             <font>
                                                 <Font name="System Bold" size="13.0" />
                                             </font>

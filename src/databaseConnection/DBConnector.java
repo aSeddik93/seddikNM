@@ -113,9 +113,9 @@ public class DBConnector {
             getId.next();
             int id=getId.getInt(1)+1;
             System.out.println(id);
-            Motorhome newMotorhome= new Motorhome(brand,price,capacity);
+            Motorhome newMotorhome= new Motorhome(brand,price,capacity,"Available");
             newMotorhome.setId(id);
-            res = makeUpdate("INSERT INTO motorhome (motorhomeid, capacity, price, brand) VALUES ('"+id+"','"+capacity+"','"+price+"','"+brand+"')");
+            res = makeUpdate("INSERT INTO motorhome (motorhomeid, capacity, price, brand,status) VALUES ('"+id+"','"+capacity+"','"+price+"','"+brand+"','Available')");
             ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
             if(res==1)motorhomeList.add(newMotorhome);
         } catch (Exception e ) {
@@ -123,6 +123,7 @@ public class DBConnector {
         }
         return res==1;
     }
+
 
     public boolean deleteMotorhome(Fleet fleet, Motorhome byeMotorhome) {
         try {

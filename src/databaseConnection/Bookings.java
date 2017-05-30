@@ -36,6 +36,11 @@ public class Bookings {
                         result.getDouble("distance2"), result.getString("startDate"), result.getString("endDate"),
                         result.getBoolean("extra1"), result.getBoolean("extra2"), result.getBoolean("extra3"),
                         result.getBoolean("extra4"),result.getInt("motorhomeid"),result.getInt("customerid"));
+                //find all relevant Booking Objects from the Bookings singleton
+                ArrayList<Payment> paymentsOfThisBooking= Payments.getInstance().getPaymentsOfBooking(toAdd.getId());
+                //add ArrayList of relevant Bookings to the Motorhome
+                toAdd.setPaymentList(paymentsOfThisBooking);
+
                 theBookingList.add(toAdd);
 
 
@@ -110,6 +115,8 @@ public class Bookings {
 
     }
 
+    public Booking getBooking(int index) {return theBookingList.get(index);}
+
     /**
      * this method iterates through theBookingList and looks for bookings that
      * are relevant to a motorhome id.
@@ -118,7 +125,7 @@ public class Bookings {
      * in case you are still in doubt call 0045 71587288
      */
 
-    public ArrayList<Booking> getPaymentsOfBooking(int motorhomeId) {
+    public ArrayList<Booking> getBookingsOfMotorhome(int motorhomeId) {
         ArrayList<Booking> listOfRelevantBookings = new ArrayList<>();
         for(Booking b:theBookingList){
             if(b.getMotorhomeId()==motorhomeId){
