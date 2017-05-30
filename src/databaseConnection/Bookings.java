@@ -109,7 +109,7 @@ public class Bookings {
 
             if(b.getId() == id) {
 
-                b.addPaymentToBoking(payment);
+                b.addPaymentToBooking(payment);
             }
         }
 

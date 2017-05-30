@@ -9,9 +9,11 @@ import javafx.collections.FXCollections;
 
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Created by ADMIN on 24-05-2017.
@@ -77,7 +79,7 @@ public class Booking {
 
     }
 
-    public void addPaymentToBoking(Payment p) {
+    public void addPaymentToBooking(Payment p) {
         paymentList.add(p);
     }
 
@@ -368,6 +370,37 @@ public class Booking {
     {
         LocalDate today = LocalDate.now();
         return(today.isEqual(getEndDate()));
+    }
+
+    public int daysBeforeStartDate(){
+        LocalDate today = LocalDate.now();
+        Period intervalPeriod = Period.between(today, getStartDate());
+        return intervalPeriod.getDays();
+    }
+
+    public Payment cancelBooking() {
+        if (getAmount() < 201) {
+            return null;
+        }
+
+        Payment p;
+        int id = paymentList.size()-1;
+        //String cardType, int cardNumber, String cardHolder, int cardCVC, String cardExpiry, double amount,int bookingid
+        String cardType = paymentList.get(paymentList.size()-1).getCardType();
+        int cardNumber = paymentList.get(paymentList.size()-1).getCardNumber();
+        String cardHolder = paymentList.get(paymentList.size()-1).getCardHolder();
+        int cardCVC = paymentList.get(paymentList.size()-1).getCardCVC();
+        String cardExpiry = paymentList.get(paymentList.size()-1).getCardExpiry();
+
+        if(daysBeforeStartDate() >= 50) {
+            p= new Payment(paymentList.size()-1,cardType,cardNumber,cardHolder,cardCVC,cardExpiry,-(getAmount()*0.8),getId());}
+        else if (daysBeforeStartDate()>14) {p= new Payment(paymentList.size()-1,cardType,cardNumber,cardHolder,cardCVC,cardExpiry,-(getAmount()*0.5),getId());}
+        else if (daysBeforeStartDate()>0) {p= new Payment(paymentList.size()-1,cardType,cardNumber,cardHolder,cardCVC,cardExpiry,-(getAmount()*0.2),getId());}
+        else {p= new Payment(paymentList.size()-1,cardType,cardNumber,cardHolder,cardCVC,cardExpiry,-(getAmount()*0.05),getId());}
+
+        setStatus("Cancelled");
+        return p;
+
     }
 }
 

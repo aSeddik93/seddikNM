@@ -48,9 +48,9 @@
                             <content>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <TableView fx:id="dropOffsToday" prefHeight="263.0" prefWidth="156.0">
+                                        <TableView fx:id="dropOffsToday" layoutX="68.0" layoutY="20.0" prefHeight="203.0" prefWidth="198.0">
                                             <columns>
-                                                <TableColumn fx:id="motorhomeid" prefWidth="155.0" text="MotorHome id" />
+                                                <TableColumn fx:id="motorhomeid" prefWidth="197.0" text="MotorHome id" />
                                             </columns>
                                         </TableView>
                                         <Button fx:id="notReturned" layoutX="320.0" layoutY="158.0" mnemonicParsing="false" onAction="#notReturnedButton" prefHeight="37.0" prefWidth="107.0" text="Not Returned">
@@ -67,11 +67,11 @@
                                 </AnchorPane>
                             </content>
                         </Tab>
-                        <Tab text="Uder Inspection">
+                        <Tab text="Under Inspection">
                             <content>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <TableView fx:id="UnderInspection" layoutX="-5.0" prefHeight="258.0" prefWidth="219.0">
+                                        <TableView fx:id="UnderInspection" layoutX="27.0" layoutY="23.0" prefHeight="202.0" prefWidth="211.0">
                                             <columns>
                                                 <TableColumn fx:id="motorhomeid1" prefWidth="218.0" text="MotorHome id" />
                                             </columns>
@@ -92,25 +92,24 @@
                                     </children></AnchorPane>
                             </content>
                         </Tab>
-                        <Tab text="Out Of Order">
-                            <content>
-                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                    <children>
-                                        <TableView fx:id="OutOfOrder" layoutX="-5.0" prefHeight="258.0" prefWidth="332.0">
-                                            <columns>
-                                                <TableColumn fx:id="motorhomeid2" prefWidth="123.0" text="MotorHome id" />
-                                                <TableColumn fx:id="comments" prefWidth="208.0" text="Comments" />
-                                            </columns>
-                                        </TableView>
-                                        <Button fx:id="repaired" layoutX="409.0" layoutY="107.0" mnemonicParsing="false" onAction="#passButton2" prefHeight="45.0" prefWidth="105.0" text="Repaired">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Button>
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </Tab>
+                  <Tab text="Out Of Order">
+                     <content>
+                        <AnchorPane prefHeight="243.0" prefWidth="254.0">
+                           <children>
+                              <TableView fx:id="OutOfOrder" layoutX="70.0" layoutY="19.0" prefHeight="205.0" prefWidth="205.0">
+                                 <columns>
+                                    <TableColumn fx:id="motorhomeid2" prefWidth="204.0" text="MotorHome id" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="repaired" layoutX="345.0" layoutY="93.0" mnemonicParsing="false" onAction="#passButton2" prefHeight="45.0" prefWidth="105.0" text="Repaired">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
                     </tabs>
                     <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

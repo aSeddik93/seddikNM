@@ -1,6 +1,7 @@
 package view;
 
 import databaseConnection.*;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +28,14 @@ import java.util.ResourceBundle;
 public class SalesmanController implements Initializable {
 
 
-    public DatePicker customerdob1;
+    public TableView <Booking> existingBookings;
+    public TableColumn <Booking, Integer> bookingID;
+    public TableColumn <Booking, LocalDate> endDate,startDate;
+    public TableColumn <Booking, String> status;
+    public TableColumn <Booking, Double> distance1, distance2;
+    public TableColumn <Booking, Boolean> bikerack1, childseat1, picnictable, chairs1;
+    public Button cancelBooking;
+
     DBConnector db = new DBConnector();
 
     public TextField newPickUp;
@@ -56,6 +64,7 @@ public class SalesmanController implements Initializable {
     public ChoiceBox<String> numberOfPersons;
     public TextField customerName1;
     public TextField customerEmail1;
+    public DatePicker customerdob1;
     @FXML
     public ChoiceBox<String> title;
     public TextField customerTelephone1;
@@ -65,8 +74,6 @@ public class SalesmanController implements Initializable {
     @FXML
     public ChoiceBox<String> cardType;
     public TextField cardCVC;
-    public TableView existingBookings;
-    public TableColumn bookingID;
     public TableColumn nameColumn;
     public TableColumn emailColumn;
     public TableColumn motorhomeColumn;
@@ -100,6 +107,7 @@ public class SalesmanController implements Initializable {
         numberOfPersons.getItems().addAll(capacity);
         title.getItems().addAll(titles);
         cardType.getItems().addAll(cardTypes);
+        initializeExistingBookings();
 
 
     }
@@ -119,7 +127,7 @@ public class SalesmanController implements Initializable {
     }
 
     public void selectBooking(MouseEvent mouseEvent) throws IOException {
-        SceneManager.getInstance().loadBookkeeperScene();
+
     }
 
 
@@ -165,6 +173,22 @@ public class SalesmanController implements Initializable {
             }
 
         }
+    }
+
+    public void initializeExistingBookings() {
+        existingBookings.setEditable(true);
+        bookingID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        endDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        distance1.setCellValueFactory(new PropertyValueFactory<>("distance1"));
+        distance2.setCellValueFactory(new PropertyValueFactory<>("distance2"));
+        bikerack1.setCellValueFactory(new PropertyValueFactory<>("extra1"));
+        childseat1.setCellValueFactory(new PropertyValueFactory<>("extra2"));
+        picnictable.setCellValueFactory(new PropertyValueFactory<>("extra3"));
+        chairs1.setCellValueFactory(new PropertyValueFactory<>("extra4"));
+        existingBookings.setItems(bookingList);
+        cancelBooking.disableProperty().bind(Bindings.isEmpty(existingBookings.getSelectionModel().getSelectedItems()));
+
     }
 
 }
