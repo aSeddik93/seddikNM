@@ -1,6 +1,7 @@
 package model;
 
 import databaseConnection.Bookings;
+import databaseConnection.Fleet;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 
@@ -212,6 +213,13 @@ public class Booking {
         return motorhomeid;
     }
 
+    public boolean isBookedNow() {
+
+        LocalDate today = LocalDate.now();
+        return (today.isAfter((getStartDate())) || today.isEqual(getStartDate())) && (today.isBefore(getEndDate()) || today.isEqual(getEndDate()));
+
+    }
+
     public void setMotorhomeId(int motorhomeId) {
         this.motorhomeid = motorhomeId;
     }
@@ -275,6 +283,55 @@ public class Booking {
      */
     public void addPayment(Payment newPayment){
         this.paymentList.add(newPayment);
+    }
+
+    private void calculatePrice(){
+        double temp=0;
+        //add the fee for drop off and collection of the motorhome
+        temp+=(distance1.doubleValue()+distance2.doubleValue())*0.7;
+        //price of all the extras per booking
+        double extrasPrice =0.0;
+        if(extra1.getValue())
+            extrasPrice+=100;
+        if(extra2.getValue())
+            extrasPrice+=100;
+        if(extra3.getValue())
+            extrasPrice+=100;
+        if(extra4.getValue())
+            extrasPrice+=100;
+        //add the extras to the price
+        temp+=extrasPrice;
+        //get the motorhome object
+        Motorhome thisOne= Fleet.getInstance().searchById(motorhomeid);
+        if(thisOne!=null){
+            //if we found it, we get the low season price
+            double pricePerDay= thisOne.getPrice();
+            //we are using a cursor day, will add the price for that day and then move the cursor date one day forward
+            LocalDate cursorDay=startDate.getValue();
+            while(!cursorDay.equals(endDate.getValue())){
+                int cursorMonth = cursorDay.getMonthValue();
+                //high season price= lowseason + lowseason*0.3 + (lowseason + lowseason*0.3)*0,6= 2,08*lowseason
+                if(cursorMonth==6||cursorMonth==7){
+                    temp+=pricePerDay*2.08;
+                }
+                //medium season price = lowseason + lowseason*0,3 = 1,3*lowseason
+                else if(cursorMonth==4||cursorMonth==5||cursorMonth==8||cursorMonth==9){
+                    temp+=pricePerDay*1.3;
+                }
+                // low season price
+                else{
+                    temp+=pricePerDay;
+                }
+                cursorDay= cursorDay.plusDays(1);
+            }
+        }
+        setAmount(temp);
+    }
+
+    public boolean dropOffToday()
+    {
+        LocalDate today = LocalDate.now();
+        return(today.isEqual(getEndDate()));
     }
 }
 

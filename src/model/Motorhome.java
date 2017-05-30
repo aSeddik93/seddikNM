@@ -21,6 +21,13 @@ public class Motorhome {
     private ObservableList<Booking> bookingList = FXCollections.observableArrayList();
     private String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     private int id;
 
@@ -107,6 +114,18 @@ public class Motorhome {
         return true;
 
     }
+
+    public boolean isDroppedOffToday() {
+
+        for (Booking b : bookingList) {
+
+            return b.dropOffToday();
+        }
+
+        return false;
+    }
+
+
 
     public void addBookingToMotorhome (Booking b) {
 

@@ -8,7 +8,9 @@ import model.Payment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is a singleton, meaning there can be only one instance of this class during runtime.
@@ -87,5 +89,27 @@ public class Fleet {
             }
         }
 
+    }
+
+    public ObservableList<Motorhome> setRentedOutMotorhomeList() {
+
+        ObservableList<Motorhome> rentedOut = FXCollections.observableArrayList();
+        for (Motorhome m : getTheFleetList())
+        {
+            if (m.isDroppedOffToday()) {
+                rentedOut.add(m);
+            }
+        }
+
+        return rentedOut;
+    }
+
+    public Motorhome searchById(int motorhomeid) {
+        for(Motorhome m: theFleetList){
+            if(m.getId()==motorhomeid){
+                return m;
+            }
+        }
+        return null;
     }
 }
