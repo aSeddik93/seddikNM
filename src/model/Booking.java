@@ -94,108 +94,45 @@ public class Booking {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status.get();
-    }
-
-    public StringProperty statusProperty() {
-        return status;
-    }
-
     public void setStatus(String status) {
         this.status.set(status);
-    }
-
-    public double getDistance1() {
-        return distance1.get();
-    }
-
-    public DoubleProperty distance1Property() {
-        return distance1;
     }
 
     public void setDistance1(double distance1) {
         this.distance1.set(distance1);
     }
 
-    public double getDistance2() {
-        return distance2.get();
-    }
-
-    public DoubleProperty distance2Property() {
-        return distance2;
-    }
-
     public void setDistance2(double distance2) {
         this.distance2.set(distance2);
     }
 
-    public LocalDate getStartDate() {
+    private LocalDate getStartDate() {
         return startDate.get();
-    }
-
-    public ObjectProperty<LocalDate> startDateProperty() {
-        return startDate;
     }
 
     public void setStartDate(LocalDate startDate) {
         this.startDate.set(startDate);
     }
 
-    public LocalDate getEndDate() {
+    private LocalDate getEndDate() {
         return endDate.get();
     }
 
-    public ObjectProperty<LocalDate> endDateProperty() {
-        return endDate;
-    }
 
     public void setEndDate(LocalDate endDate) {
         this.endDate.set(endDate);
-    }
-
-    public boolean isExtra1() {
-        return extra1.get();
-    }
-
-    public BooleanProperty extra1Property() {
-        return extra1;
     }
 
     public void setExtra1(boolean extra1) {
         this.extra1.set(extra1);
     }
 
-    public boolean isExtra2() {
-        return extra2.get();
-    }
-
-    public BooleanProperty extra2Property() {
-        return extra2;
-    }
-
     public void setExtra2(boolean extra2) {
         this.extra2.set(extra2);
     }
 
-    public boolean isExtra3() {
-        return extra3.get();
-    }
-
-    public BooleanProperty extra3Property() {
-        return extra3;
-    }
-
     public void setExtra3(boolean extra3) {
         this.extra3.set(extra3);
-    }
-
-    public boolean isExtra4() {
-        return extra4.get();
-    }
-
-    public BooleanProperty extra4Property() {
-        return extra4;
     }
 
     public void setExtra4(boolean extra4) {
@@ -206,7 +143,7 @@ public class Booking {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    private void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -254,7 +191,7 @@ public class Booking {
         return motorhomeid;
     }
 
-    public boolean isBookedNow() {
+    boolean isBookedNow() {
 
         LocalDate today = LocalDate.now();
         return (today.isAfter((getStartDate())) || today.isEqual(getStartDate())) && (today.isBefore(getEndDate()) || today.isEqual(getEndDate()));
@@ -281,7 +218,7 @@ public class Booking {
      * to be used later
      * @param newPayment latest payment to be added to the Booking's list of Payments.
      */
-    public void addPayment(Payment newPayment){
+    private void addPayment(Payment newPayment){
         this.paymentList.add(newPayment);
     }
 
@@ -328,13 +265,13 @@ public class Booking {
         setAmount(temp);
     }
 
-    public boolean dropOffToday()
+    boolean dropOffToday()
     {
         LocalDate today = LocalDate.now();
         return(today.isEqual(getEndDate()));
     }
 
-    public int daysBeforeStartDate(){
+    private int daysBeforeStartDate(){
         LocalDate today = LocalDate.now();
         Period intervalPeriod = Period.between(today, getStartDate());
         return intervalPeriod.getDays();

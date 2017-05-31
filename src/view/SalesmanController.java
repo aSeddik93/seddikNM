@@ -8,8 +8,6 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -39,8 +37,7 @@ public class SalesmanController implements Initializable {
     public TableColumn <Booking, Boolean> bikerack1, childseat1, picnictable, chairs1;
     public Button cancelBooking;
 
-    public Label priceLabel;
-    public Tab bookingsTab;
+
     public Button logout;
 
 
@@ -87,8 +84,6 @@ public class SalesmanController implements Initializable {
     public TableColumn<Customer,String> customerTitle,customerName,customerEmail;
     public TableColumn<Customer,LocalDate> customerDoB;
     public Button book;
-
-    private Customer currentCustomer=null;
 
 
     @FXML
@@ -196,7 +191,7 @@ public class SalesmanController implements Initializable {
     }
 
 
-    public ObservableList<Motorhome> availableMotorhomes(int capacity, LocalDate startDate, LocalDate endDate) {
+    private ObservableList<Motorhome> availableMotorhomes(int capacity, LocalDate startDate, LocalDate endDate) {
 
         ObservableList<Motorhome> availableMotorhomes = FXCollections.observableArrayList();
 
@@ -236,51 +231,48 @@ public class SalesmanController implements Initializable {
     }
 
     public void bookOnAction(ActionEvent event) throws IOException {
-        //checks that data are valid to make a new bookingif (event.getSource().equals(book)&&customerAndPaymentFieldsValid()) {
-
+        //checks that data are valid to make a new booking
+        if (event.getSource().equals(book) && customerAndPaymentFieldsValid()) {
             int customerid;
-            if(currentCustomer==null) {
-                customerid = Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());}else{
-                customerid=currentCustomer.getId();
+            if (currentCustomer == null) {
+                customerid = Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
+            } else {
+                customerid = currentCustomer.getId();
             }
             int motorhomeid = availablemotorhomes.getSelectionModel().getSelectedItem().getId();
             double distance1;
             double distance2;
-            if(newPickUp.getText().isEmpty()){
-                distance1=0;
+            if (newPickUp.getText().isEmpty()) {
+                distance1 = 0;
+            } else {
+                distance1 = Double.parseDouble(newPickUp.getText());
             }
-            else{
-                distance1=Double.parseDouble(newPickUp.getText());
+            if (newDropOff.getText().isEmpty()) {
+                distance2 = 0;
+            } else {
+                distance2 = Double.parseDouble(newDropOff.getText());
             }
-            if(newDropOff.getText().isEmpty()){
-                distance2=0;
-            }else{
-                distance2=Double.parseDouble(newDropOff.getText());
-            }
-            int bookingid = Bookings.getInstance().addBooking(bookings,"Booked", distance1, distance2,
-                    PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(),picnic.isSelected(),chairs.isSelected(),
+            int bookingid = Bookings.getInstance().addBooking(bookings, "Booked", distance1, distance2,
+                    PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(), picnic.isSelected(), chairs.isSelected(),
                     motorhomeid, customerid);
             double price = showPrice();
-            int paymentid = Payments.getInstance().addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),price,bookingid);
+            int paymentid = Payments.getInstance().addPayment(payments, cardType.getValue(), cardNumber.getText(), cardName.getText(), cardCVC.getText(), cardExpiry.getText(), price, bookingid);
 
             Booking newBooking = bookings.searchBooking(bookingid);
             Payment newPayment = payments.searchPayment(paymentid);
 
-            fleet.addBookingtToBookedMotorhome(motorhomeid,newBooking);
-            bookings.addPaymentToNewBooking(bookingid,newPayment);
+            fleet.addBookingtToBookedMotorhome(motorhomeid, newBooking);
+            bookings.addPaymentToNewBooking(bookingid, newPayment);
             book.setTooltip(null);
-            SceneManager.getInstance().displayConfirmation("Confirmation","Booking saved", "Booking saved & added to the system");
-        }
-        else{
+            SceneManager.getInstance().displayConfirmation("Confirmation","Booking saved", "Booking saved and added to the system");
+        } else {
             book.setTooltip(new Tooltip("You need to fill in all the Fields in order to proceed with the booking."));
         }
-
-
     }
 
-    //TODO make sure they have a valid format also
+
     private boolean customerAndPaymentFieldsValid() {
-        if(!priceLabel.textProperty().getValue().equals("0.0€")&&
+        if(!priceLabel.textProperty().getValue().equals("0.0,-")&&
                 (currentCustomer!=null||
                         !title.getSelectionModel().isEmpty()&&
                                 customerName1.textProperty().isNotNull().get()&&
@@ -313,28 +305,9 @@ public class SalesmanController implements Initializable {
         }
 
     }
-    //TODO make sure they have a valid format also
-    private boolean customerAndPaymentFieldsValid() {
-        if(!priceLabel.textProperty().getValue().equals("0.0,-")&&
-                        (currentCustomer!=null||
-                    !title.getSelectionModel().isEmpty()&&
-                    customerName1.textProperty().isNotNull().get()&&
-                    customerTelephone1.textProperty().isNotNull().get()&&
-                    customerdob1.valueProperty().isNotNull().get()&&
-                    customerEmail1.textProperty().isNotNull().get()) &&
-                    !cardType.getSelectionModel().isEmpty()&&
-                    cardCVC.textProperty().isNotNull().get()&&
-                    cardExpiry.textProperty().isNotNull().get()&&
-                    cardName.textProperty().isNotNull().get()&&
-                    cardNumber.textProperty().isNotNull().get()
-                ){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
-    public void searchAvailable(ActionEvent event) {
+
+    private void searchAvailable(ActionEvent event) {
         availablemotorhomes.getItems().clear();
         if(!numberOfPersons.getSelectionModel().isEmpty()&&PickUpDate.valueProperty().isNotNull().get()&&DropOffDate.valueProperty().isNotNull().get()) {
             String number = numberOfPersons.getValue();
@@ -354,12 +327,12 @@ public class SalesmanController implements Initializable {
             for (Motorhome m : available) {
                 System.out.println(m.getId());
             }
-}else{
-                    System.out.println("Not enough data to find available Motorhomes");
+    }else{
+            System.out.println("Not enough data to find available Motorhomes");
         }
     }
 
-    public void initializeExistingBookings() {
+    private void initializeExistingBookings() {
         bookingID.setCellValueFactory(new PropertyValueFactory<>("id"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
@@ -375,7 +348,7 @@ public class SalesmanController implements Initializable {
 
     }
 
-    public void initializeCustomerTable() {
+    private void initializeCustomerTable() {
         customerId.setCellValueFactory(new PropertyValueFactory<>("id"));
         customerName.setCellValueFactory(new PropertyValueFactory<>("name"));
         customerEmail.setCellValueFactory(new PropertyValueFactory<>("email"));

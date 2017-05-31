@@ -5,8 +5,6 @@ import databaseConnection.Customers;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Antonia on 19-05-2017.
@@ -47,48 +45,20 @@ public class Customer {
         return dob.get();
     }
 
-    public ObjectProperty<LocalDate> dobProperty() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob.set(dob);
-    }
-
     public int getTel() {
         return tel.get();
-    }
-
-    public IntegerProperty telProperty() {
-        return tel;
-    }
-
-    public void setTel(int tel) {
-        this.tel.set(tel);
     }
 
     public String getTitle() {
         return title.get();
     }
 
-    public StringProperty titleProperty() {
-        return title;
-    }
-
     public String getname() {
         return name.get();
     }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
-
     public String getEmail() {
         return email.get();
-    }
-
-    public StringProperty emailProperty() {
-        return email;
     }
 
     public int getId() {

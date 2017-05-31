@@ -108,7 +108,7 @@ public class Bookings {
      * @return a List of all the bookings that their motorhomeId field is equal to the parameter passed.
      */
 
-    public ArrayList<Booking> getBookingsOfMotorhome(int motorhomeId) {
+    ArrayList<Booking> getBookingsOfMotorhome(int motorhomeId) {
         ArrayList<Booking> listOfRelevantBookings = new ArrayList<>();
         for(Booking b:theBookingList){
             if(b.getMotorhomeId()==motorhomeId){
