@@ -5,6 +5,8 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -75,6 +77,7 @@ public class SalesmanController implements Initializable {
     public TextField cardNumber;
     public TextField cardExpiry;
     @FXML
+    public Label priceLabel;
     public ChoiceBox<String> cardType;
     public TextField cardCVC;
     public TableColumn nameColumn;
@@ -104,7 +107,8 @@ public class SalesmanController implements Initializable {
     TableColumn<Motorhome, Integer> motorhomeCapacity;
     @FXML
     TableColumn<Motorhome, Double> motorhomePrice;
-
+    Tab bookingsTab;
+    Customer currentCustomer=null;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -241,12 +245,11 @@ public class SalesmanController implements Initializable {
     }
 
     public void bookOnAction(ActionEvent event) throws IOException {
-        //checks that data are valid to make a new booking
-        if (event.getSource().equals(book)&& customerAndPaymentFieldsValid()) {
+        //checks that data are valid to make a new bookingif (event.getSource().equals(book)&&customerAndPaymentFieldsValid()) {
+
             int customerid;
             if(currentCustomer==null) {
-                customerid = Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
-            }else{
+                customerid = Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());}else{
                 customerid=currentCustomer.getId();
             }
             int motorhomeid = availablemotorhomes.getSelectionModel().getSelectedItem().getId();
@@ -322,6 +325,26 @@ public class SalesmanController implements Initializable {
         }
 
     }
+    //TODO make sure they have a valid format also
+    private boolean customerAndPaymentFieldsValid() {
+        if(!priceLabel.textProperty().getValue().equals("0.0,-")&&
+                        (currentCustomer!=null||
+                    !title.getSelectionModel().isEmpty()&&
+                    customerName1.textProperty().isNotNull().get()&&
+                    customerTelephone1.textProperty().isNotNull().get()&&
+                    customerdob1.valueProperty().isNotNull().get()&&
+                    customerEmail1.textProperty().isNotNull().get()) &&
+                    !cardType.getSelectionModel().isEmpty()&&
+                    cardCVC.textProperty().isNotNull().get()&&
+                    cardExpiry.textProperty().isNotNull().get()&&
+                    cardName.textProperty().isNotNull().get()&&
+                    cardNumber.textProperty().isNotNull().get()
+                ){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public void searchAvailable(ActionEvent event) {
         availablemotorhomes.getItems().clear();
@@ -344,8 +367,8 @@ public class SalesmanController implements Initializable {
             for (Motorhome m : available) {
                 System.out.println(m.getId());
             }
-        }else{
-            System.out.println("Not enough data to find available Motorhomes");
+}else{
+                    System.out.println("Not enough data to find available Motorhomes");
         }
     }
 
@@ -367,3 +390,5 @@ public class SalesmanController implements Initializable {
     }
 
 }
+
+

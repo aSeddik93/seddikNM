@@ -27,8 +27,8 @@ public class Booking {
     private double amount;
 
     private StringProperty status = new SimpleStringProperty(this, "title", "unknown");
-    private DoubleProperty distance1 = new SimpleDoubleProperty(this, "distance1", -1);
-    private DoubleProperty distance2 = new SimpleDoubleProperty(this, "distance1", -1);
+    private DoubleProperty distance1 = new SimpleDoubleProperty(this, "distance1", 0);
+    private DoubleProperty distance2 = new SimpleDoubleProperty(this, "distance1", 0);
     private ObjectProperty<LocalDate> startDate = new SimpleObjectProperty<>(this, "startDate", null);
     private ObjectProperty<LocalDate> endDate = new SimpleObjectProperty<>(this, "endDate", null);
     private BooleanProperty extra1 = new SimpleBooleanProperty(this, "extra1", false);
@@ -39,7 +39,6 @@ public class Booking {
     private int customerid;
     private int motorhomeid;
     private ArrayList<Payment> paymentList = new ArrayList<>();
-
 
 
     public Booking(){
@@ -60,8 +59,6 @@ public class Booking {
         this.extra4.setValue(extra4);
         this.customerid = customerid;
         this.motorhomeid = motorhomeid;
-        setAmount(999);
-
     }
 
     public Booking(int id, String status, Double distance1, Double distance2, LocalDate startDate, LocalDate endDate,
@@ -78,8 +75,6 @@ public class Booking {
         this.extra4.setValue(extra4);
         this.customerid = customerid;
         this.motorhomeid = motorhomeid;
-        setAmount(999);
-
     }
 
     public void addPaymentToBooking(Payment p) {
@@ -274,35 +269,43 @@ public class Booking {
         distance1.addListener(
                 (v, oldValue, newValue) -> {
                     Bookings.getInstance().updateBookings(this, "distance1", newValue.toString());
+                    calculatePrice();
                 });
         distance2.addListener(
                 (v, oldValue, newValue) -> {
                     Bookings.getInstance().updateBookings(this, "distance2", newValue.toString());
+                    calculatePrice();
                 });
         startDate.addListener(
                 (v, oldValue, newValue) -> {
                     Bookings.getInstance().updateBookings(this, "startDate", newValue.toString());
+                    calculatePrice();
                 });
         endDate.addListener(
                 (v, oldValue, newValue) -> {
                     Bookings.getInstance().updateBookings(this, "endDate", newValue.toString());
+                    calculatePrice();
                 });
 
         extra1.addListener(
                 (v, oldValue, newValue) -> {
                     Bookings.getInstance().updateBookings(this, "extra1", newValue.toString());
+                    calculatePrice();
                 });
         extra2.addListener(
                 (v, oldValue, newValue) -> {
                     Bookings.getInstance().updateBookings(this, "extra2", newValue.toString());
+                    calculatePrice();
                 });
         extra3.addListener(
                 (v, oldValue, newValue) -> {
                     Bookings.getInstance().updateBookings(this, "extra3", newValue.toString());
+                    calculatePrice();
                 });
         extra4.addListener(
                 (v, oldValue, newValue) -> {
                     Bookings.getInstance().updateBookings(this, "extra4", newValue.toString());
+                    calculatePrice();
                 });
     }
 
@@ -326,7 +329,7 @@ public class Booking {
         this.paymentList.add(newPayment);
     }
 
-    public void calculatePrice(){
+    private void calculatePrice(){
         double temp=0;
         //add the fee for drop off and collection of the motorhome
         temp+=(distance1.doubleValue()+distance2.doubleValue())*0.7;
