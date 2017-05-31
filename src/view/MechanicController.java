@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Motorhome;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,6 +24,9 @@ public class MechanicController implements Initializable{
 
     public TextField kmdriven;
     public CheckBox fuel;
+    public Button LogOut1;
+    public Button LogOut2;
+    public Button LogOut3;
     private Fleet fleet = Fleet.getInstance();
     private List<Motorhome> motorhomeList = fleet.getTheFleetList();
     private DBConnector db = new DBConnector();
@@ -118,5 +122,11 @@ public class MechanicController implements Initializable{
     }
 
     public void passButton2(ActionEvent event) {
+    }
+
+    public void logOutButton(ActionEvent event) throws IOException {
+        if (event.getSource().equals(LogOut1) || event.getSource().equals(LogOut2) || event.getSource().equals(LogOut3)) {
+            SceneManager.getInstance().loadLoginScene();
+        }
     }
 }

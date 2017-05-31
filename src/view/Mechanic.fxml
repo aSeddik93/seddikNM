@@ -14,26 +14,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MechanicController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MechanicController">
     <left>
-        <HBox prefHeight="521.0" prefWidth="641.0" BorderPane.alignment="CENTER">
+        <HBox prefHeight="476.0" prefWidth="641.0" BorderPane.alignment="CENTER">
             <children>
-                <TabPane prefHeight="460.0" prefWidth="621.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
+                <TabPane prefHeight="404.0" prefWidth="583.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
                     <tabs>
                         <Tab text="Drop Offs Today">
                             <content>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <TableView fx:id="dropOffsToday" layoutX="68.0" layoutY="20.0" prefHeight="203.0" prefWidth="198.0">
+                                        <TableView fx:id="dropOffsToday" layoutX="68.0" layoutY="20.0" prefHeight="297.0" prefWidth="198.0">
                                             <columns>
                                                 <TableColumn fx:id="motorhomeid" prefWidth="197.0" text="MotorHome id" />
                                             </columns>
                                         </TableView>
-                                        <Button fx:id="pickedUp" layoutX="319.0" layoutY="117.0" mnemonicParsing="false" onAction="#pickedUpButton" prefHeight="40.0" prefWidth="110.0" text="Picked up">
+                                        <Button fx:id="pickedUp" layoutX="319.0" layoutY="166.0" mnemonicParsing="false" onAction="#pickedUpButton" prefHeight="36.0" prefWidth="110.0" text="Picked up">
                                             <font>
                                                 <Font name="System Bold" size="13.0" />
                                             </font>
                                         </Button>
+                              <Button fx:id="LogOut1" layoutX="477.0" layoutY="281.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" text="LogOut" />
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -42,7 +43,7 @@
                             <content>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <TableView fx:id="UnderInspection" layoutX="27.0" layoutY="23.0" prefHeight="202.0" prefWidth="211.0">
+                                        <TableView fx:id="UnderInspection" layoutX="27.0" layoutY="23.0" prefHeight="304.0" prefWidth="211.0">
                                             <columns>
                                                 <TableColumn fx:id="motorhomeid1" prefWidth="218.0" text="MotorHome id" />
                                             </columns>
@@ -60,6 +61,7 @@
                               <TextField fx:id="kmdriven" layoutX="260.0" layoutY="69.0" prefHeight="39.0" prefWidth="104.0" />
                               <Label layoutX="268.0" layoutY="34.0" prefHeight="27.0" prefWidth="88.0" text="KM Driven" />
                               <CheckBox fx:id="fuel" layoutX="412.0" layoutY="75.0" mnemonicParsing="false" text="Fuel Under Half" />
+                              <Button fx:id="LogOut2" layoutX="478.0" layoutY="294.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="39.0" prefWidth="96.0" text="Log Out" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
@@ -67,16 +69,17 @@
                      <content>
                         <AnchorPane prefHeight="243.0" prefWidth="254.0">
                            <children>
-                              <TableView fx:id="OutOfOrder" layoutX="70.0" layoutY="19.0" prefHeight="205.0" prefWidth="205.0">
+                              <TableView fx:id="OutOfOrder" layoutX="70.0" layoutY="19.0" prefHeight="303.0" prefWidth="205.0">
                                  <columns>
                                     <TableColumn fx:id="motorhomeid2" prefWidth="204.0" text="MotorHome id" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="repaired" layoutX="345.0" layoutY="93.0" mnemonicParsing="false" onAction="#passButton2" prefHeight="45.0" prefWidth="105.0" text="Repaired">
+                              <Button fx:id="repaired" layoutX="345.0" layoutY="117.0" mnemonicParsing="false" onAction="#passButton2" prefHeight="38.0" prefWidth="105.0" text="Repaired">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Button>
+                              <Button fx:id="LogOut3" layoutX="476.0" layoutY="283.0" mnemonicParsing="false" onAction="#logOutButton" prefHeight="39.0" prefWidth="98.0" text="Log Out" />
                            </children>
                         </AnchorPane>
                      </content>
