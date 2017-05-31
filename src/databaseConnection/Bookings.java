@@ -117,4 +117,8 @@ public class Bookings {
         }
         return listOfRelevantBookings;
     }
+
+    public void setTheBookingList(ObservableList<Booking> theBookingList) {
+        this.theBookingList = theBookingList;
+    }
 }

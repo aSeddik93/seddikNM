@@ -23,6 +23,7 @@ import model.Payment;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -37,7 +38,7 @@ public class BookkeeperController implements Initializable {
     private DBConnector db = new DBConnector();
     private ObservableList<Customer> customerList = Customers.getInstance().getTheCustomerList();
     private ObservableList<Booking> bookingList = Bookings.getInstance().getTheBookingList();
-    private ObservableList<Payment> paymentList = FXCollections.observableArrayList(Payments.getInstance().getPaymentList());
+    private List<Payment> paymentList = Payments.getInstance().getPaymentList();
 
     @FXML
     TableView<Booking> BookingsTable;
@@ -52,10 +53,14 @@ public class BookkeeperController implements Initializable {
     @FXML
     TableColumn<Booking, String> bookingStatus;
 
-    public TableView<Payment> paymentsTable;
-    public TableColumn<Payment,Integer> paymentId,cardNumber,cardBookingid,cardCVC;
-    public TableColumn<Payment,Double> paymentamount;
-    public TableColumn<Payment,String> cardHolder,cardType,cardExpiry;
+    @FXML
+    TableView<Payment> paymentsTable;
+    @FXML
+    TableColumn<Payment,Integer> paymentId,cardNumber,cardBookingid,cardCVC;
+    @FXML
+    TableColumn<Payment,Double> paymentamount;
+    @FXML
+    TableColumn<Payment,String> cardHolder,cardType,cardExpiry;
 
 
 
@@ -142,7 +147,7 @@ public class BookkeeperController implements Initializable {
         cardBookingid.setCellValueFactory(new PropertyValueFactory<>("cardBookingid"));
         paymentamount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         cardCVC.setCellValueFactory(new PropertyValueFactory<>("cardCVC"));
-        paymentsTable.setItems(paymentList);
+        paymentsTable.setItems(FXCollections.observableArrayList(paymentList));
     }
 
 

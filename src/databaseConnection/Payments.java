@@ -82,4 +82,7 @@ public class Payments {
     }
 
 
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
+    }
 }

@@ -94,7 +94,6 @@ public class Motorhome {
 
 
         if(!checkCapacity(capacity)) {
-            System.out.println("WHAT'S UP2");
             return false;
         }
 
@@ -105,7 +104,6 @@ public class Motorhome {
         for(Booking b : bookingList) {
 
             if(!b.isWithinRange(startDate,endDate)) {
-                System.out.println("WHAT'S UP3");
                 return false;
             }
         }
@@ -217,4 +215,35 @@ public class Motorhome {
         this.bookingList.add(newBooking);
     }
 
+    public String getBrand() {
+        return brand.get();
+    }
+
+    public StringProperty brandProperty() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand.set(brand);
+    }
+
+    public DoubleProperty priceProperty() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
+    }
+
+    public IntegerProperty nbrPersonsProperty() {
+        return nbrPersons;
+    }
+
+    public void setNbrPersons(int nbrPersons) {
+        this.nbrPersons.set(nbrPersons);
+    }
+
+    public void setBookingList(ObservableList<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
 }

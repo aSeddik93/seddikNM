@@ -23,6 +23,11 @@ public class Fleet {
     //this field is the observable list where all the motorhomes are stored and accessed
     private ObservableList<Motorhome> theFleetList = FXCollections.observableArrayList();
 
+
+    public void setTheFleetList(ObservableList<Motorhome> theFleetList) {
+        this.theFleetList = theFleetList;
+    }
+
     //this is the method to call whenever you want to get access to the Fleet
 
     public ObservableList<Motorhome> getTheFleetList() {

@@ -11,6 +11,49 @@ import java.time.LocalDate;
  */
 
 public class Customer {
+    public StringProperty titleProperty() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
+    }
+
+    public ObjectProperty<LocalDate> dobProperty() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob.set(dob);
+    }
+
+    public IntegerProperty telProperty() {
+        return tel;
+    }
+
+    public void setTel(int tel) {
+        this.tel.set(tel);
+    }
 
     private StringProperty title = new SimpleStringProperty(this, "title", "unknown");
     private StringProperty name = new SimpleStringProperty(this, "name", "unknown");

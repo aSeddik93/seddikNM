@@ -311,6 +311,91 @@ public class Booking {
             e.printStackTrace();
         }
     }
+
+    public String getStatus() {
+        return status.get();
+    }
+
+    public StringProperty statusProperty() {
+        return status;
+    }
+
+    public double getDistance1() {
+        return distance1.get();
+    }
+
+    public DoubleProperty distance1Property() {
+        return distance1;
+    }
+
+    public double getDistance2() {
+        return distance2.get();
+    }
+
+    public DoubleProperty distance2Property() {
+        return distance2;
+    }
+
+    public ObjectProperty<LocalDate> startDateProperty() {
+        return startDate;
+    }
+
+    public ObjectProperty<LocalDate> endDateProperty() {
+        return endDate;
+    }
+
+    public boolean isExtra1() {
+        return extra1.get();
+    }
+
+    public BooleanProperty extra1Property() {
+        return extra1;
+    }
+
+    public boolean isExtra2() {
+        return extra2.get();
+    }
+
+    public BooleanProperty extra2Property() {
+        return extra2;
+    }
+
+    public boolean isExtra3() {
+        return extra3.get();
+    }
+
+    public BooleanProperty extra3Property() {
+        return extra3;
+    }
+
+    public boolean isExtra4() {
+        return extra4.get();
+    }
+
+    public BooleanProperty extra4Property() {
+        return extra4;
+    }
+
+    public int getCustomerid() {
+        return customerid;
+    }
+
+    public void setCustomerid(int customerid) {
+        this.customerid = customerid;
+    }
+
+    public int getMotorhomeid() {
+        return motorhomeid;
+    }
+
+    public void setMotorhomeid(int motorhomeid) {
+        this.motorhomeid = motorhomeid;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = (ArrayList<Payment>) paymentList;
+    }
+
 }
 
 
