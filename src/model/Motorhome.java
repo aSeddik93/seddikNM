@@ -1,6 +1,5 @@
 package model;
 
-import databaseConnection.DBConnector;
 import databaseConnection.Fleet;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -8,7 +7,6 @@ import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -74,29 +72,15 @@ public class Motorhome {
     }
 
 
-    public String getBrand() {
-        return brand.get();
-    }
-
-    public StringProperty brandProperty() {
-        return brand;
-    }
-
-    public double getPrice() {
+    double getPrice() {
         return price.get();
     }
 
-    public DoubleProperty priceProperty() {
-        return price;
-    }
 
-    public int getNbrPersons() {
+    private int getNbrPersons() {
         return nbrPersons.get();
     }
 
-    public IntegerProperty nbrPersonsProperty() {
-        return nbrPersons;
-    }
 
     public int getId() {
         return id;
@@ -132,9 +116,9 @@ public class Motorhome {
 
     public boolean isDroppedOffToday() {
 
-        for (Booking b : bookingList) {
+        for(Booking b : bookingList) {
 
-            return b.dropOffToday() && (Objects.equals(getStatus(), "RentedOutmechanic"));
+            return b.dropOffToday() && (Objects.equals(getStatus(), "RentedOut"));
         }
 
         return false;

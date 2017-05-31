@@ -38,7 +38,6 @@ public class Fleet {
     *the constructor can be called only be the ourInstance field, and its called only once per runtime.
     * This constructor loads all the motorhomes from the database to the Observable list TheFleet.
      * it also locates all relevant Bookings of a Motorhome and adds them to the Motorhome's instance
-     * in case you are still in doubt call 0045 71587288
     */
     private Fleet(){
         DBConnector db = new DBConnector();
@@ -60,10 +59,6 @@ public class Fleet {
             e.printStackTrace();
         }
         db.closeConnection();
-        //TODO remove, this is just for debugging
-        for(Motorhome m: theFleetList){
-            System.out.println(m);
-        }
     }
 
     public void updateMotorhome(Motorhome toUpdate, String column, String newValue){
@@ -72,7 +67,6 @@ public class Fleet {
             db.makeUpdate("UPDATE motorhome SET "+column+"='"+newValue+"' WHERE motorhomeid="+toUpdate.getId());
         } catch (SQLException e) {
             e.printStackTrace();
-            //TODO handle it properly
         }
     }
 

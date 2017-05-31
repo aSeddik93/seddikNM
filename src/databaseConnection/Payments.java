@@ -1,7 +1,5 @@
 package databaseConnection;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.Payment;
 
 import java.sql.ResultSet;
@@ -41,19 +39,7 @@ public class Payments {
             e.printStackTrace();
         }
         db.closeConnection();
-        //TODO remove, this is just for debugging
-        for(Payment p: paymentList){
-            System.out.println(p);
-        }}
-
-    public void updatePayments(Payment toUpdate, String column, String newValue){
-        DBConnector db = new DBConnector();
-        try {
-            db.makeUpdate("UPDATE payments SET "+column+"='"+newValue+"' WHERE id="+toUpdate.getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-    }
 
     public int addPayment(Payments payments, String cardType, String cardNumber, String cardHolder, String cardCVC, String cardExpiry, double amount, int bookingid) {
         int res = 0;
@@ -85,7 +71,7 @@ public class Payments {
         return null;
     }
 
-    public ArrayList<Payment> getPaymentsOfBooking(int bookingid) {
+    ArrayList<Payment> getPaymentsOfBooking(int bookingid) {
         ArrayList<Payment> listOfRelevantPayments = new ArrayList<>();
         for(Payment p: getPaymentList()){
             if(p.getBookingId() == bookingid){

@@ -3,7 +3,6 @@ package databaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Booking;
-import model.Customer;
 import model.Payment;
 
 import java.sql.ResultSet;
@@ -49,24 +48,11 @@ public class Bookings {
             e.printStackTrace();
         }
         db.closeConnection();
-        //TODO remove, this is just for debugging
-        for(Booking b: theBookingList){
-            System.out.println(b);
-        }
-    }
-
-    public void updateBookings(Booking toUpdate, String column, String newValue){
-        DBConnector db = new DBConnector();
-        try {
-            db.makeUpdate("UPDATE customer SET "+column+"='"+newValue+"' WHERE id="+toUpdate.getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public int addBooking(Bookings bookings, String status, Double distance1, Double distance2, LocalDate startDate, LocalDate endDate,
                           Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4, int motorhomeid, int customerid) {
-        int res = 0;
+        int res;
         try {
             DBConnector db = new DBConnector();
             ResultSet getId=db.makeQuery("select max(bookingid) from bookings");
@@ -115,25 +101,11 @@ public class Bookings {
 
     }
 
-    public int getIndexOfBooking(Booking booking) {
-        for(Booking b : getTheBookingList()) {
-            if(b.getId() == booking.getId()) {
-                return getTheBookingList().indexOf(b);
-            }
-        }
-
-        return -1;
-
-    }
-
-    public Booking getBooking(int index) {return theBookingList.get(index);}
-
     /**
      * this method iterates through theBookingList and looks for bookings that
      * are relevant to a motorhome id.
      * @param motorhomeId a valid id of a Motorhome
      * @return a List of all the bookings that their motorhomeId field is equal to the parameter passed.
-     * in case you are still in doubt call 0045 71587288
      */
 
     public ArrayList<Booking> getBookingsOfMotorhome(int motorhomeId) {

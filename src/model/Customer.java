@@ -20,7 +20,6 @@ public class Customer {
     private ObjectProperty<LocalDate> dob = new SimpleObjectProperty<>(this, "dob", null);
     private IntegerProperty tel = new SimpleIntegerProperty(this, "tel", -1);
 
-    private List<Booking> customerBookings = new ArrayList<>();
 
     private int id;
 

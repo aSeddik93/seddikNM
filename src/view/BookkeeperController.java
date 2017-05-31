@@ -1,6 +1,8 @@
 package view;
 
 import databaseConnection.*;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,10 +18,10 @@ import javafx.util.converter.IntegerStringConverter;
 import model.Booking;
 import model.Customer;
 import model.Motorhome;
+import model.Payment;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -28,11 +30,14 @@ import java.util.ResourceBundle;
  */
 public class BookkeeperController implements Initializable {
 
+    public Button logout;
+
     private Fleet fleet = Fleet.getInstance();
     private ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
     private DBConnector db = new DBConnector();
     private ObservableList<Customer> customerList = Customers.getInstance().getTheCustomerList();
     private ObservableList<Booking> bookingList = Bookings.getInstance().getTheBookingList();
+    private ObservableList<Payment> paymentList = FXCollections.observableArrayList(Payments.getInstance().getPaymentList());
 
     @FXML
     TableView<Booking> BookingsTable;
@@ -46,6 +51,11 @@ public class BookkeeperController implements Initializable {
     TableColumn<Booking, Boolean> bookingExtra1, bookingExtra2, bookingExtra3, bookingExtra4;
     @FXML
     TableColumn<Booking, String> bookingStatus;
+
+    public TableView<Payment> paymentsTable;
+    public TableColumn<Payment,Integer> paymentId,cardNumber,cardBookingid,cardCVC;
+    public TableColumn<Payment,Double> paymentamount;
+    public TableColumn<Payment,String> cardHolder,cardType,cardExpiry;
 
 
 
@@ -76,7 +86,7 @@ public class BookkeeperController implements Initializable {
     public TextField newNbrPersons;
     public Button motorhomeAddButton;
 
-    public void initializeMotorhomeTable() {
+    private void initializeMotorhomeTable() {
         //initializes players tab
 
         motorhomesTable.setEditable(true);
@@ -89,15 +99,10 @@ public class BookkeeperController implements Initializable {
         motorhomePrice.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         motorhomesTable.setItems(motorhomeList);
         //disables the delete button when there is nothing selected
-        motorhomesTable.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
-            if (newValue == null) {
-                motorhomeRemoveButton.setDisable(true);
-            } else
-                motorhomeRemoveButton.setDisable(false);
-        });
+        motorhomeRemoveButton.disableProperty().bind(Bindings.isEmpty(motorhomesTable.getSelectionModel().getSelectedItems()));
     }
 
-    public void initializeCustomerTable() {
+    private void initializeCustomerTable() {
         //initializes players tab
 
         customersTable.setEditable(true);
@@ -111,7 +116,7 @@ public class BookkeeperController implements Initializable {
 
     }
 
-    public void initializeBookingTable() {
+    private void initializeBookingTable() {
 
         bookingId.setCellValueFactory(new PropertyValueFactory<>("id"));
         bookingStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
@@ -127,24 +132,37 @@ public class BookkeeperController implements Initializable {
 
     }
 
+    private void initializePaymentTable() {
+
+        paymentId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        cardNumber.setCellValueFactory(new PropertyValueFactory<>("cardNumber"));
+        cardHolder.setCellValueFactory(new PropertyValueFactory<>("cardHolder"));
+        cardType.setCellValueFactory(new PropertyValueFactory<>("cardType"));
+        cardExpiry.setCellValueFactory(new PropertyValueFactory<>("cardExpiry"));
+        cardBookingid.setCellValueFactory(new PropertyValueFactory<>("cardBookingid"));
+        paymentamount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        cardCVC.setCellValueFactory(new PropertyValueFactory<>("cardCVC"));
+        paymentsTable.setItems(paymentList);
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeMotorhomeTable();
         initializeCustomerTable();
         initializeBookingTable();
+        initializePaymentTable();
 
     }
 
     @FXML
     public void add(ActionEvent event) throws IOException {
         if (event.getSource().equals(motorhomeAddButton)) {
-            System.out.println("HERE");
             if (db.addMotorhome(fleet, newBrand.getText(), Integer.parseInt(newNbrPersons.getText()), Double.parseDouble(newPrice.getText()))) {
-                System.out.println("Motorhome added");
                 newBrand.clear();
                 newPrice.clear();
                 newNbrPersons.clear();
+                SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome added","Motorhome successfully added to the system");
             } else {
                 System.out.println(("Could not add Motorhome right now."));
             }
@@ -157,9 +175,16 @@ public class BookkeeperController implements Initializable {
             Motorhome byeMotorhome = motorhomesTable.getSelectionModel().getSelectedItem();
             if(!db.deleteMotorhome(fleet,byeMotorhome))
                 System.out.println("Could not delete Motorhome right now.");
-            else
-                System.out.println("Motorhome deleted from records.");
+            else {
+                SceneManager.getInstance().displayConfirmation("Confirmation", "Motorhome remove", "Motorhome successfully removed from the system");
+            }
 
+        }
+    }
+
+    public void logOutButton(ActionEvent event) throws IOException {
+        if (event.getSource().equals(logout)) {
+            SceneManager.getInstance().loadLoginScene();
         }
     }
 }

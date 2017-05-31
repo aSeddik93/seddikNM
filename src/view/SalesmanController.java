@@ -1,6 +1,9 @@
 package view;
 
-import databaseConnection.*;
+import databaseConnection.Bookings;
+import databaseConnection.Customers;
+import databaseConnection.Fleet;
+import databaseConnection.Payments;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.MouseEvent;
 import model.Booking;
 import model.Customer;
 import model.Motorhome;
@@ -19,7 +21,6 @@ import model.Payment;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -38,8 +39,8 @@ public class SalesmanController implements Initializable {
 
     public Label priceLabel;
     public Tab bookingsTab;
+    public Button logout;
 
-    DBConnector db = new DBConnector();
 
     public TextField newPickUp;
     public TextField newDropOff;
@@ -48,6 +49,7 @@ public class SalesmanController implements Initializable {
     public CheckBox picnic;
     public CheckBox chairs;
 
+
     private Fleet fleet = Fleet.getInstance();
     private ObservableList<Motorhome> motorhomeList = fleet.getTheFleetList();
     private Bookings bookings = Bookings.getInstance();
@@ -55,7 +57,6 @@ public class SalesmanController implements Initializable {
     private Customers customers = Customers.getInstance();
     private ObservableList<Customer> customerList = customers.getTheCustomerList();
     private Payments payments = Payments.getInstance();
-    private List<Payment> PaymentList = payments.getPaymentList();
 
 
     private final String capacity[] = {"2", "4", "6", "8"};
@@ -77,21 +78,14 @@ public class SalesmanController implements Initializable {
     @FXML
     public ChoiceBox<String> cardType;
     public TextField cardCVC;
-    public TableColumn nameColumn;
-    public TableColumn emailColumn;
-    public TableColumn motorhomeColumn;
-    public TableColumn pickUp;
-    public TableColumn dropOff;
-    public TableColumn customerId;
-    public TableColumn customerTitle;
-    public TableColumn customerName;
-    public TableColumn customerDoB;
-    public TableColumn customerEmail;
-    public TableColumn customerTelephone;
-    public Button search;
+
+    public TableView<Customer> customerTable;
+    public TableColumn<Customer,Integer> customerId,customerTelephone;
+    public TableColumn<Customer,String> customerTitle,customerName,customerEmail;
+    public TableColumn<Customer,LocalDate> customerDoB;
     public Button book;
 
-    Customer currentCustomer=null;
+    private Customer currentCustomer=null;
 
 
     @FXML
@@ -114,6 +108,7 @@ public class SalesmanController implements Initializable {
         cardType.getItems().addAll(cardTypes);
         DropOffDate.setDisable(true);
         initializeExistingBookings();
+        initializeCustomerTable();
         //will enable the dropoffdate DatePicker and allow to select only future dates.
         PickUpDate.valueProperty().addListener((v,oldValue,newValue)->{
             DropOffDate.setDisable(false);
@@ -211,10 +206,6 @@ public class SalesmanController implements Initializable {
         return availableMotorhomes;
     }
 
-    public void selectBooking(MouseEvent mouseEvent) throws IOException {
-
-    }
-
     private double showPrice(){
         if(!availablemotorhomes.getSelectionModel().isEmpty()){
             Booking tempBooking = new Booking();
@@ -267,8 +258,6 @@ public class SalesmanController implements Initializable {
                     PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(),picnic.isSelected(),chairs.isSelected(),
                     motorhomeid, customerid);
             double price = showPrice();
-            System.out.println(price +"aaaaaaaaaaaaaaaa");
-            System.out.println();
             int paymentid = Payments.getInstance().addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),price,bookingid);
 
             Booking newBooking = bookings.searchBooking(bookingid);
@@ -277,6 +266,7 @@ public class SalesmanController implements Initializable {
             fleet.addBookingtToBookedMotorhome(motorhomeid,newBooking);
             bookings.addPaymentToNewBooking(bookingid,newPayment);
             book.setTooltip(null);
+            SceneManager.getInstance().displayConfirmation("Confirmation","Booking saved", "Booking saved & added to the system");
         }
         else{
             book.setTooltip(new Tooltip("You need to fill in all the Fields in order to proceed with the booking."));
@@ -287,7 +277,7 @@ public class SalesmanController implements Initializable {
 
     //TODO make sure they have a valid format also
     private boolean customerAndPaymentFieldsValid() {
-        if(!priceLabel.textProperty().getValue().equals("0.0,-")&&
+        if(!priceLabel.textProperty().getValue().equals("0.0€")&&
                 (currentCustomer!=null||
                         !title.getSelectionModel().isEmpty()&&
                                 customerName1.textProperty().isNotNull().get()&&
@@ -314,10 +304,8 @@ public class SalesmanController implements Initializable {
             int motorhomeid = b.getMotorhomeId();
             int motorhomeindex = Fleet.getInstance().getIndexOfActualMotorhome(motorhomeid);
             int bookingindex = Fleet.getInstance().getTheFleetList().get(motorhomeindex).getIndexOfBooking(b);
-            System.out.println(motorhomeindex+"FORFORFOR");
-            System.out.println(bookingindex+"ooooooooooooooooooooooooo");
             Fleet.getInstance().getTheFleetList().get(motorhomeindex).getBookingList().get(bookingindex).cancelBooking();
-
+            SceneManager.getInstance().displayConfirmation("Confirmation","Booking Cancelled","Booking cancelled & system updated");
 
         }
 
@@ -340,7 +328,6 @@ public class SalesmanController implements Initializable {
             availablemotorhomes.selectionModelProperty().addListener((v,oldValue,newValue)->{
                 showPrice();
             });
-            System.out.println("WE ARE HERREEE!!!");  //TODO remove heheheh
             for (Motorhome m : available) {
                 System.out.println(m.getId());
             }
@@ -350,7 +337,6 @@ public class SalesmanController implements Initializable {
     }
 
     public void initializeExistingBookings() {
-        existingBookings.setEditable(true);
         bookingID.setCellValueFactory(new PropertyValueFactory<>("id"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
@@ -364,6 +350,22 @@ public class SalesmanController implements Initializable {
         existingBookings.setItems(bookingList);
         cancelBooking.disableProperty().bind(Bindings.isEmpty(existingBookings.getSelectionModel().getSelectedItems()));
 
+    }
+
+    public void initializeCustomerTable() {
+        customerId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        customerName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        customerEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        customerTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        customerTelephone.setCellValueFactory(new PropertyValueFactory<>("tel"));
+        customerDoB.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        customerTable.setItems(customerList);
+    }
+
+    public void logOutButton(ActionEvent event) throws IOException {
+        if (event.getSource().equals(logout)) {
+            SceneManager.getInstance().loadLoginScene();
+        }
     }
 
 }

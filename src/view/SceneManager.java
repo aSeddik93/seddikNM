@@ -3,9 +3,12 @@ package view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Created by ADMIN on 16-05-2017.
@@ -23,7 +26,8 @@ public class SceneManager {
     }
 
     private Stage primaryStage;
-    public void setStage(Stage primaryStage) {
+
+    void setStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
@@ -48,5 +52,18 @@ public class SceneManager {
         Parent mechanicRoot = FXMLLoader.load(getClass().getResource("/view/mechanic.fxml"));
         Scene mechanicScene = new Scene(mechanicRoot, 900, 575);
         primaryStage.setScene(mechanicScene);
+    }
+
+
+
+    void displayConfirmation(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (!result.isPresent() || result.get() != ButtonType.OK) {
+        }
     }
 }

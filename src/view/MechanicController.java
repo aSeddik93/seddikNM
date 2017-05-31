@@ -1,9 +1,6 @@
 package view;
 
-import databaseConnection.Bookings;
-import databaseConnection.DBConnector;
 import databaseConnection.Fleet;
-import databaseConnection.Payments;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +11,6 @@ import model.Motorhome;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -24,22 +20,16 @@ public class MechanicController implements Initializable{
 
     public TextField kmdriven;
     public CheckBox fuel;
-    public Button LogOut1;
-    public Button LogOut2;
-    public Button LogOut3;
-    private Fleet fleet = Fleet.getInstance();
-    private List<Motorhome> motorhomeList = fleet.getTheFleetList();
-    private DBConnector db = new DBConnector();
-
+    public Button logout;
 
 
     public TableColumn <Motorhome,Integer> motorhomeid;
-    public Button notReturned;
+
     public Button pickedUp;
     public Button pass;
     public Button fail;
     public TableColumn <Motorhome,Integer> motorhomeid1;
-    public TableColumn <Motorhome,Integer> comments;
+
     public Button repaired;
     public TableView <Motorhome> UnderInspection;
     public TableColumn <Motorhome,Integer> motorhomeid2;
@@ -52,8 +42,6 @@ public class MechanicController implements Initializable{
         ObservableList<Motorhome> droppedOffToday = Fleet.getInstance().setRentedOutMotorhomeList();
         motorhomeid.setCellValueFactory(new PropertyValueFactory<>("id"));
         dropOffsToday.setItems(droppedOffToday);
-
-        notReturned.disableProperty().bind(Bindings.isEmpty(dropOffsToday.getSelectionModel().getSelectedItems()));
         pickedUp.disableProperty().bind(Bindings.isEmpty(dropOffsToday.getSelectionModel().getSelectedItems()));
     }
 
@@ -76,28 +64,15 @@ public class MechanicController implements Initializable{
 
 
     public void initialize(URL location, ResourceBundle resources) {
-
         initializeRentedOutTable();
         initializeUnderInspectionTable();
         initializeOutOfOrderTable();
-
-
-    }
-
-
-    public void notReturnedButton(ActionEvent event) {
-        if (event.getSource().equals(notReturned)) {
-            Fleet.getInstance().updateMotorhome(dropOffsToday.getSelectionModel().getSelectedItem(),"status","NotReturned");
-
-
-    }
-
-
     }
 
     public void pickedUpButton(ActionEvent event) {
         if (event.getSource().equals(pickedUp)) {
             Fleet.getInstance().updateMotorhome(dropOffsToday.getSelectionModel().getSelectedItem(),"status","UnderIncpection");
+            SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome picked up", "Motorhome is picked up and added to Under Inspection list");
         }
     }
 
@@ -107,7 +82,7 @@ public class MechanicController implements Initializable{
             int bookingindex = UnderInspection.getSelectionModel().getSelectedItem().getIndexOfActualBooking();
             int motorhomeindex = Fleet.getInstance().getIndexOfActualMotorhome(UnderInspection.getSelectionModel().getSelectedItem().getId());
             Fleet.getInstance().getTheFleetList().get(motorhomeindex).getBookingList().get(bookingindex).addInspectionPayment(Double.valueOf(kmdriven.getText()),fuel.isSelected());
-
+            SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome passed Incpection", "Motorhome passed Incpection and is back on the system");
         }
     }
 
@@ -117,15 +92,22 @@ public class MechanicController implements Initializable{
             int bookingindex = UnderInspection.getSelectionModel().getSelectedItem().getIndexOfActualBooking();
             int motorhomeindex = Fleet.getInstance().getIndexOfActualMotorhome(UnderInspection.getSelectionModel().getSelectedItem().getId());
             Fleet.getInstance().getTheFleetList().get(motorhomeindex).getBookingList().get(bookingindex).addInspectionPayment(Double.valueOf(kmdriven.getText()),fuel.isSelected());
+            SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome failed Incpection", "Motorhome failed Incpection and is added to Out Of Order List");
+        }
+        }
 
+
+    public void passButton2(ActionEvent event) {
+        if (event.getSource().equals(repaired)) {
+            Fleet.getInstance().updateMotorhome(UnderInspection.getSelectionModel().getSelectedItem(), "status", "Available");
+            SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome Repaired", "Motorhome has been repaired and is back on the system");
         }
     }
 
-    public void passButton2(ActionEvent event) {
-    }
+
 
     public void logOutButton(ActionEvent event) throws IOException {
-        if (event.getSource().equals(LogOut1) || event.getSource().equals(LogOut2) || event.getSource().equals(LogOut3)) {
+        if (event.getSource().equals(logout)) {
             SceneManager.getInstance().loadLoginScene();
         }
     }

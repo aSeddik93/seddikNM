@@ -48,60 +48,30 @@ public class Payment {
         this.id = id;
     }
 
-    public String getCardType() {
+    String getCardType() {
         return cardType;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
-    }
-
-    public int getCardNumber() {
+    int getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public String getCardHolder() {
+    String getCardHolder() {
         return cardHolder;
     }
 
-    public void setCardHolder(String cardHolder) {
-        this.cardHolder = cardHolder;
-    }
-
-    public int getCardCVC() {
+    int getCardCVC() {
         return cardCVC;
     }
 
-    public void setCardCVC(int cardCVC) {
-        this.cardCVC = cardCVC;
-    }
-
-    public String getCardExpiry() {
+    String getCardExpiry() {
         return cardExpiry;
     }
 
-    public void setCardExpiry(String cardExpiry) {
-        this.cardExpiry = cardExpiry;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
 
     public int getBookingId() {
         return bookingId;
     }
 
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
-    }
 }
 

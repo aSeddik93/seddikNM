@@ -39,10 +39,7 @@ public class Customers {
             e.printStackTrace();
         }
         db.closeConnection();
-        //TODO remove, this is just for debugging
-        for(Customer c: theCustomerList){
-            System.out.println(c);
-        }}
+        }
 
     public void updateCustomers(Customer toUpdate, String column, String newValue){
         DBConnector db = new DBConnector();

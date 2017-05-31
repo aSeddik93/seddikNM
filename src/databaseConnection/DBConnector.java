@@ -1,14 +1,9 @@
 package databaseConnection;
 
 import javafx.collections.ObservableList;
-import model.Booking;
-import model.Customer;
 import model.Motorhome;
-import model.Payment;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.List;
 
 /**
  * This class can be used whenever we need a connection to the Database
@@ -49,7 +44,7 @@ public class DBConnector {
      * Use this method after every query in order to close the connection and avoid problems
      * with other parts of the application trying to connect with the database.
      */
-    public void closeConnection(){
+    void closeConnection(){
         try {
             conn.close();
         } catch (SQLException e) {
@@ -99,7 +94,6 @@ public class DBConnector {
         }
         try {
             conn = DriverManager.getConnection(url+dbName,userName,password);
-            System.out.println("We got the connection"); //TODO remove, this was used for debugging
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -112,7 +106,6 @@ public class DBConnector {
             ResultSet getId=makeQuery("select max(motorhomeid) from motorhome");
             getId.next();
             int id=getId.getInt(1)+1;
-            System.out.println(id);
             Motorhome newMotorhome= new Motorhome(brand,price,capacity,"Available");
             newMotorhome.setId(id);
             res = makeUpdate("INSERT INTO motorhome (motorhomeid, capacity, price, brand,status) VALUES ('"+id+"','"+capacity+"','"+price+"','"+brand+"','Available')");
