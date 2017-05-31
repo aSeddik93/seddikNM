@@ -265,47 +265,6 @@ public class Booking {
         this.motorhomeid = motorhomeId;
     }
 
-    private void setListeners() {
-
-        status.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "status", newValue);
-                });
-        distance1.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "distance1", newValue.toString());
-                });
-        distance2.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "distance2", newValue.toString());
-                });
-        startDate.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "startDate", newValue.toString());
-                });
-        endDate.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "endDate", newValue.toString());
-                });
-
-        extra1.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "extra1", newValue.toString());
-                });
-        extra2.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "extra2", newValue.toString());
-                });
-        extra3.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "extra3", newValue.toString());
-                });
-        extra4.addListener(
-                (v, oldValue, newValue) -> {
-                    Bookings.getInstance().updateBookings(this, "extra4", newValue.toString());
-                });
-    }
-
     /**
      * this method is called by the Bookings singleton,
      * whenever we launch the app, all bookings are loaded from the DB
