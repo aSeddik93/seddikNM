@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="FINAL PUSH WALAHI">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/databaseConnection/Incpections.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/model/Incpection.java" afterPath="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/databaseConnection/Staff.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/databaseConnection/Staff.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/view/Controller.class" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/view/Controller.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JavaFxApplication/view/salesman.fxml" afterPath="$PROJECT_DIR$/out/production/JavaFxApplication/view/salesman.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Bookings.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Bookings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Customers.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Customers.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/DBConnector.java" afterPath="$PROJECT_DIR$/src/databaseConnection/DBConnector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Fleet.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Fleet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Payments.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Payments.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/databaseConnection/Staff.java" afterPath="$PROJECT_DIR$/src/databaseConnection/Staff.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Booking.java" afterPath="$PROJECT_DIR$/src/model/Booking.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Customer.java" afterPath="$PROJECT_DIR$/src/model/Customer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Motorhome.java" afterPath="$PROJECT_DIR$/src/model/Motorhome.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/Payment.java" afterPath="$PROJECT_DIR$/src/model/Payment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/BookkeeperController.java" afterPath="$PROJECT_DIR$/src/view/BookkeeperController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/Controller.java" afterPath="$PROJECT_DIR$/src/view/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/Mechanic.fxml" afterPath="$PROJECT_DIR$/src/view/Mechanic.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/MechanicController.java" afterPath="$PROJECT_DIR$/src/view/MechanicController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/SalesmanController.java" afterPath="$PROJECT_DIR$/src/view/SalesmanController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/SceneManager.java" afterPath="$PROJECT_DIR$/src/view/SceneManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/bookkeeper.fxml" afterPath="$PROJECT_DIR$/src/view/bookkeeper.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/salesman.fxml" afterPath="$PROJECT_DIR$/src/view/salesman.fxml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -930,7 +910,7 @@
       <workItem from="1496183945044" duration="4780000" />
       <workItem from="1496189487529" duration="6077000" />
       <workItem from="1496195807272" duration="2067000" />
-      <workItem from="1496197906190" duration="6954000" />
+      <workItem from="1496197906190" duration="6990000" />
     </task>
     <task id="LOCAL-00001" summary="Bookkeeper Menu connected to the controller">
       <created>1495151650246</created>
@@ -1093,11 +1073,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496196495907</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="FINAL PUSH WALAHI">
+      <created>1496204879743</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1496204879743</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183923000" />
+    <option name="totallyTimeSpent" value="183959000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
@@ -1105,7 +1092,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32648402" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
