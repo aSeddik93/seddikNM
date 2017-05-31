@@ -110,6 +110,10 @@ public class MechanicController implements Initializable{
     public void failButton(ActionEvent event) {
         if (event.getSource().equals(fail)) {
             Fleet.getInstance().updateMotorhome(UnderInspection.getSelectionModel().getSelectedItem(), "status", "OutOfOrder");
+            int bookingindex = UnderInspection.getSelectionModel().getSelectedItem().getIndexOfActualBooking();
+            int motorhomeindex = Fleet.getInstance().getIndexOfActualMotorhome(UnderInspection.getSelectionModel().getSelectedItem().getId());
+            Fleet.getInstance().getTheFleetList().get(motorhomeindex).getBookingList().get(bookingindex).addInspectionPayment(Double.valueOf(kmdriven.getText()),fuel.isSelected());
+
         }
     }
 

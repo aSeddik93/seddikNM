@@ -36,6 +36,9 @@ public class SalesmanController implements Initializable {
     public TableColumn <Booking, Boolean> bikerack1, childseat1, picnictable, chairs1;
     public Button cancelBooking;
 
+    public Label priceLabel;
+    public Tab bookingsTab;
+
     DBConnector db = new DBConnector();
 
     public TextField newPickUp;
@@ -88,6 +91,8 @@ public class SalesmanController implements Initializable {
     public Button search;
     public Button book;
 
+    Customer currentCustomer=null;
+
 
     @FXML
     TableView<Motorhome> availablemotorhomes;
@@ -107,10 +112,90 @@ public class SalesmanController implements Initializable {
         numberOfPersons.getItems().addAll(capacity);
         title.getItems().addAll(titles);
         cardType.getItems().addAll(cardTypes);
+        DropOffDate.setDisable(true);
         initializeExistingBookings();
-
-
+        //will enable the dropoffdate DatePicker and allow to select only future dates.
+        PickUpDate.valueProperty().addListener((v,oldValue,newValue)->{
+            DropOffDate.setDisable(false);
+            DropOffDate.setDayCellFactory((DropOffDate)->
+                    new DateCell() {
+                        @Override
+                        public void updateItem(LocalDate item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (item.isBefore(PickUpDate.getValue().plusDays(1))) {
+                                setDisable(true);
+                                setStyle("-fx-background-color: #ffc0cb;");
+                            }
+                        }
+                    });
+            if (DropOffDate.valueProperty().isNotNull().get()&&(DropOffDate.getValue().isBefore(newValue)||DropOffDate.getValue().equals(newValue)))
+                DropOffDate.setValue(null);
+        });
+        PickUpDate.setOnAction(this::searchAvailable);
+        PickUpDate.setDayCellFactory((DropOffDate)->
+                new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(LocalDate.now().plusDays(1))) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                });
+        DropOffDate.setOnAction(this::searchAvailable);
+        numberOfPersons.setOnAction(this::searchAvailable);
+        newDropOff.textProperty().addListener((v,oldValue,newValue)->{
+            showPrice();
+        });
+        newPickUp.textProperty().addListener((v,oldValue,newValue)->{
+            showPrice();
+        });
+        bikerack.selectedProperty().addListener((v,oldValue,newValue)->{
+            showPrice();
+        });
+        picnic.selectedProperty().addListener((v,oldValue,newValue)->{
+            showPrice();
+        });
+        chairs.selectedProperty().addListener((v,oldValue,newValue)->{
+            showPrice();
+        });
+        childseat.selectedProperty().addListener((v,oldValue,newValue)->{
+            showPrice();
+        });
+        availablemotorhomes.getSelectionModel().selectedItemProperty().addListener((v,oldValue,newValue)->{
+            showPrice();
+        });
+        customerEmail1.textProperty().addListener((v,oldValue,newValue)->{
+            boolean flag =false;
+            for(Customer c: Customers.getInstance().getTheCustomerList()){
+                if(c.getEmail().equalsIgnoreCase(newValue)){
+                    customerName1.setText(c.getname());
+                    customerName1.setEditable(false);
+                    customerdob1.setValue(c.getDob());
+                    customerdob1.setDisable(true);
+                    title.setValue(c.getTitle());
+                    title.setDisable(true);
+                    customerTelephone1.setText(Integer.toString(c.getTel()));
+                    customerTelephone1.setEditable(false);
+                    flag=true;
+                    currentCustomer=c;
+                }
+            }
+            if(!flag){
+                customerName1.setEditable(true);
+                customerName1.clear();
+                customerdob1.setDisable(false);
+                customerdob1.setValue(null);
+                title.setDisable(false);
+                title.getSelectionModel().clearSelection();
+                customerTelephone1.setEditable(true);
+                customerTelephone1.clear();
+                currentCustomer=null;
+            }
+        });
     }
+
 
     public ObservableList<Motorhome> availableMotorhomes(int capacity, LocalDate startDate, LocalDate endDate) {
 
@@ -130,35 +215,121 @@ public class SalesmanController implements Initializable {
 
     }
 
+    private double showPrice(){
+        if(!availablemotorhomes.getSelectionModel().isEmpty()){
+            Booking tempBooking = new Booking();
+            //we pass the id of the selected Motorhome
+            tempBooking.setMotorhomeId(availablemotorhomes.getSelectionModel().getSelectedItem().getId());
+            if(!newPickUp.textProperty().getValue().isEmpty())
+                tempBooking.setDistance1(Double.parseDouble(newPickUp.getText()));
+            if(!newDropOff.textProperty().getValue().isEmpty())
+                tempBooking.setDistance2(Double.parseDouble(newDropOff.getText()));
+            tempBooking.setExtra1(bikerack.isSelected());
+            tempBooking.setExtra2(childseat.isSelected());
+            tempBooking.setExtra3(picnic.isSelected());
+            tempBooking.setExtra4(chairs.isSelected());
+            tempBooking.setStartDate(PickUpDate.getValue());
+            tempBooking.setEndDate(DropOffDate.getValue());
+            tempBooking.calculatePrice();
+            priceLabel.setText(Double.toString(tempBooking.getAmount())+"€");
+            return tempBooking.getAmount();
+        }else{
+            System.out.println("Not enough data to calculate price.");
+            priceLabel.setText("0.0€");
+            return 0;
+        }
+    }
 
     public void bookOnAction(ActionEvent event) throws IOException {
-        if (event.getSource().equals(book)) {
-
-            int customerid = Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
+        //checks that data are valid to make a new booking
+        if (event.getSource().equals(book)&& customerAndPaymentFieldsValid()) {
+            int customerid;
+            if(currentCustomer==null) {
+                customerid = Customers.getInstance().addCustomer(customers, title.getValue(), customerName1.getText(), customerEmail1.getText(), customerdob1.getValue(), customerTelephone1.getText());
+            }else{
+                customerid=currentCustomer.getId();
+            }
             int motorhomeid = availablemotorhomes.getSelectionModel().getSelectedItem().getId();
-            int bookingid = Bookings.getInstance().addBooking(bookings,"Booked", Double.parseDouble(newPickUp.getText()), Double.parseDouble(newDropOff.getText()),
+            double distance1;
+            double distance2;
+            if(newPickUp.getText().isEmpty()){
+                distance1=0;
+            }
+            else{
+                distance1=Double.parseDouble(newPickUp.getText());
+            }
+            if(newDropOff.getText().isEmpty()){
+                distance2=0;
+            }else{
+                distance2=Double.parseDouble(newDropOff.getText());
+            }
+            int bookingid = Bookings.getInstance().addBooking(bookings,"Booked", distance1, distance2,
                     PickUpDate.getValue(), DropOffDate.getValue(), bikerack.isSelected(), childseat.isSelected(),picnic.isSelected(),chairs.isSelected(),
                     motorhomeid, customerid);
-            int paymentid = Payments.getInstance().addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),999,bookingid);
+            double price = showPrice();
+            System.out.println(price +"aaaaaaaaaaaaaaaa");
+            System.out.println();
+            int paymentid = Payments.getInstance().addPayment(payments, cardType.getValue(), cardNumber.getText() , cardName.getText(), cardCVC.getText(), cardExpiry.getText(),price,bookingid);
 
             Booking newBooking = bookings.searchBooking(bookingid);
             Payment newPayment = payments.searchPayment(paymentid);
 
             fleet.addBookingtToBookedMotorhome(motorhomeid,newBooking);
             bookings.addPaymentToNewBooking(bookingid,newPayment);
-
+            book.setTooltip(null);
+        }
+        else{
+            book.setTooltip(new Tooltip("You need to fill in all the Fields in order to proceed with the booking."));
         }
 
 
     }
 
+    //TODO make sure they have a valid format also
+    private boolean customerAndPaymentFieldsValid() {
+        if(!priceLabel.textProperty().getValue().equals("0.0,-")&&
+                (currentCustomer!=null||
+                        !title.getSelectionModel().isEmpty()&&
+                                customerName1.textProperty().isNotNull().get()&&
+                                customerTelephone1.textProperty().isNotNull().get()&&
+                                customerdob1.valueProperty().isNotNull().get()&&
+                                customerEmail1.textProperty().isNotNull().get()) &&
+                !cardType.getSelectionModel().isEmpty()&&
+                cardCVC.textProperty().isNotNull().get()&&
+                cardExpiry.textProperty().isNotNull().get()&&
+                cardName.textProperty().isNotNull().get()&&
+                cardNumber.textProperty().isNotNull().get()
+                ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    public void cancelBookingAction(ActionEvent event) throws IOException {
+        if(event.getSource().equals(cancelBooking)) {
+
+            Booking b = existingBookings.getSelectionModel().getSelectedItem();
+            int motorhomeid = b.getMotorhomeId();
+            int motorhomeindex = Fleet.getInstance().getIndexOfActualMotorhome(motorhomeid);
+            int bookingindex = Fleet.getInstance().getTheFleetList().get(motorhomeindex).getIndexOfBooking(b);
+            System.out.println(motorhomeindex+"FORFORFOR");
+            System.out.println(bookingindex+"ooooooooooooooooooooooooo");
+            Fleet.getInstance().getTheFleetList().get(motorhomeindex).getBookingList().get(bookingindex).cancelBooking();
+
+
+        }
+
+    }
+
     public void searchAvailable(ActionEvent event) {
-        if (event.getSource().equals(search)) {
-
-            availablemotorhomes.getItems().clear();
-
-            ObservableList<Motorhome> available = availableMotorhomes(Integer.parseInt(numberOfPersons.getValue()),
-                    PickUpDate.getValue(), DropOffDate.getValue());
+        availablemotorhomes.getItems().clear();
+        if(!numberOfPersons.getSelectionModel().isEmpty()&&PickUpDate.valueProperty().isNotNull().get()&&DropOffDate.valueProperty().isNotNull().get()) {
+            String number = numberOfPersons.getValue();
+            LocalDate start = PickUpDate.getValue();
+            LocalDate end = DropOffDate.getValue();
+            ObservableList<Motorhome> available = availableMotorhomes(Integer.parseInt(number), start, end);
 
             motorhomeCapacity.setCellValueFactory(new PropertyValueFactory<>("nbrPersons"));
             motorhomeId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -166,18 +337,22 @@ public class SalesmanController implements Initializable {
             motorhomeBrand.setCellFactory(TextFieldTableCell.forTableColumn());
             motorhomePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
             availablemotorhomes.setItems(available);
+            availablemotorhomes.selectionModelProperty().addListener((v,oldValue,newValue)->{
+                showPrice();
+            });
             System.out.println("WE ARE HERREEE!!!");  //TODO remove heheheh
-            for(Motorhome m : available){
-
+            for (Motorhome m : available) {
                 System.out.println(m.getId());
             }
-
+        }else{
+            System.out.println("Not enough data to find available Motorhomes");
         }
     }
 
     public void initializeExistingBookings() {
         existingBookings.setEditable(true);
         bookingID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
         startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         endDate.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         distance1.setCellValueFactory(new PropertyValueFactory<>("distance1"));

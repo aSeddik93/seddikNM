@@ -42,6 +42,9 @@ public class Booking {
 
 
 
+    public Booking(){
+
+    }
 
     public Booking(int id, String status, Double distance1, Double distance2, String startDate, String endDate,
                    Boolean extra1, Boolean extra2, Boolean extra3, Boolean extra4, int motorhomeid, int customerid) {
@@ -323,7 +326,7 @@ public class Booking {
         this.paymentList.add(newPayment);
     }
 
-    private void calculatePrice(){
+    public void calculatePrice(){
         double temp=0;
         //add the fee for drop off and collection of the motorhome
         temp+=(distance1.doubleValue()+distance2.doubleValue())*0.7;
@@ -378,29 +381,39 @@ public class Booking {
         return intervalPeriod.getDays();
     }
 
-    public Payment cancelBooking() {
+    public void cancelBooking() {
         if (getAmount() < 201) {
-            return null;
-        }
 
-        Payment p;
-        int id = paymentList.size()-1;
+        }
+        DBConnector db = new DBConnector();
         //String cardType, int cardNumber, String cardHolder, int cardCVC, String cardExpiry, double amount,int bookingid
         String cardType = paymentList.get(paymentList.size()-1).getCardType();
         int cardNumber = paymentList.get(paymentList.size()-1).getCardNumber();
         String cardHolder = paymentList.get(paymentList.size()-1).getCardHolder();
         int cardCVC = paymentList.get(paymentList.size()-1).getCardCVC();
         String cardExpiry = paymentList.get(paymentList.size()-1).getCardExpiry();
+        double refund;
 
-        if(daysBeforeStartDate() >= 50) {
-            p= new Payment(paymentList.size()-1,cardType,cardNumber,cardHolder,cardCVC,cardExpiry,-(getAmount()*0.8),getId());}
-        else if (daysBeforeStartDate()>14) {p= new Payment(paymentList.size()-1,cardType,cardNumber,cardHolder,cardCVC,cardExpiry,-(getAmount()*0.5),getId());}
-        else if (daysBeforeStartDate()>0) {p= new Payment(paymentList.size()-1,cardType,cardNumber,cardHolder,cardCVC,cardExpiry,-(getAmount()*0.2),getId());}
-        else {p= new Payment(paymentList.size()-1,cardType,cardNumber,cardHolder,cardCVC,cardExpiry,-(getAmount()*0.05),getId());}
+        if(daysBeforeStartDate() >= 50) {refund= -(getAmount()*0.8);}
+        else if (daysBeforeStartDate()>14) {refund= -(getAmount()*0.5);}
+        else if (daysBeforeStartDate()>0) {refund= -(getAmount()*0.2);}
+        else {refund= -(getAmount()*0.05);}
 
-        setStatus("Cancelled");
-        return p;
+        try {
 
+            ResultSet getId =db.makeQuery("select max(paymentid) from payments");
+            getId.next();
+            int id =getId.getInt(1)+1;
+
+
+            db.makeUpdate("INSERT INTO payments (paymentid,cardtype,cardnumber,cardcvc,cardholder,cardexpiry,amount,bookingid) VALUES" +
+                    " ('"+id+"','"+cardType+"','"+cardNumber+"','"+cardCVC+"','"+cardHolder+"','"+cardExpiry+"','"+refund+"','"+getId()+"')");
+            addPayment(new Payment(id,cardType,cardNumber,cardHolder,cardCVC, cardExpiry, refund,getId()));
+            setStatus("Cancelled");
+        }
+        catch (Exception e ) {
+            e.printStackTrace();
+        }
     }
 }
 

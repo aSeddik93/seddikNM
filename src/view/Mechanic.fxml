@@ -9,40 +9,16 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MechanicController">
-    <top>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <ImageView fitHeight="79.0" fitWidth="169.0">
-                            <image>
-                                <Image url="@../../../../../../Desktop/download.jpg" />
-                            </image>
-                        </ImageView>
-                    </children></HBox>
-                <HBox prefHeight="79.0" prefWidth="377.0">
-                    <children>
-                        <Label prefHeight="49.0" prefWidth="381.0" text="               Mechanic home">
-                            <font>
-                                <Font name="System Bold Italic" size="24.0" />
-                            </font>
-                        </Label>
-                    </children></HBox>
-            </children>
-        </HBox>
-    </top>
     <left>
-        <HBox prefHeight="176.0" prefWidth="641.0" BorderPane.alignment="CENTER">
+        <HBox prefHeight="521.0" prefWidth="641.0" BorderPane.alignment="CENTER">
             <children>
-                <TabPane prefHeight="344.0" prefWidth="645.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
+                <TabPane prefHeight="460.0" prefWidth="621.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
                     <tabs>
                         <Tab text="Drop Offs Today">
                             <content>
@@ -53,12 +29,7 @@
                                                 <TableColumn fx:id="motorhomeid" prefWidth="197.0" text="MotorHome id" />
                                             </columns>
                                         </TableView>
-                                        <Button fx:id="notReturned" layoutX="320.0" layoutY="158.0" mnemonicParsing="false" onAction="#notReturnedButton" prefHeight="37.0" prefWidth="107.0" text="Not Returned">
-                                            <font>
-                                                <Font name="System Bold" size="13.0" />
-                                            </font>
-                                        </Button>
-                                        <Button fx:id="pickedUp" layoutX="319.0" layoutY="54.0" mnemonicParsing="false" onAction="#pickedUpButton" prefHeight="38.0" prefWidth="110.0" text="Picked up">
+                                        <Button fx:id="pickedUp" layoutX="319.0" layoutY="117.0" mnemonicParsing="false" onAction="#pickedUpButton" prefHeight="40.0" prefWidth="110.0" text="Picked up">
                                             <font>
                                                 <Font name="System Bold" size="13.0" />
                                             </font>

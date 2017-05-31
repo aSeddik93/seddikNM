@@ -115,6 +115,17 @@ public class Bookings {
 
     }
 
+    public int getIndexOfBooking(Booking booking) {
+        for(Booking b : getTheBookingList()) {
+            if(b.getId() == booking.getId()) {
+                return getTheBookingList().indexOf(b);
+            }
+        }
+
+        return -1;
+
+    }
+
     public Booking getBooking(int index) {return theBookingList.get(index);}
 
     /**

@@ -155,6 +155,17 @@ public class Motorhome {
 
     public boolean isOutOfOrder() {return Objects.equals(getStatus(), "OutOfOrder");}
 
+
+    public int getIndexOfBooking(Booking booking) {
+        for (Booking b : getBookingList()) {
+            if (b.getId() == booking.getId()) {
+                return getBookingList().indexOf(b);
+            }
+
+        }
+        return -1;
+    }
+
     public int getIndexOfActualBooking() {
         for(Booking b : bookingList) {
             if (b.isBookedNow()) {
