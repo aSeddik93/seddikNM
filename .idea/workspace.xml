@@ -910,7 +910,7 @@
       <workItem from="1496183945044" duration="4780000" />
       <workItem from="1496189487529" duration="6077000" />
       <workItem from="1496195807272" duration="2067000" />
-      <workItem from="1496197906190" duration="6990000" />
+      <workItem from="1496197906190" duration="6995000" />
     </task>
     <task id="LOCAL-00001" summary="Bookkeeper Menu connected to the controller">
       <created>1495151650246</created>
@@ -1080,11 +1080,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496204879743</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="FINAL PUSH WALAHI">
+      <created>1496204906348</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1496204906348</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183959000" />
+    <option name="totallyTimeSpent" value="183964000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
