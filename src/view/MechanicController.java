@@ -74,6 +74,10 @@ public class MechanicController implements Initializable{
             Fleet.getInstance().updateMotorhome(dropOffsToday.getSelectionModel().getSelectedItem(),"status","UnderIncpection");
             SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome picked up", "Motorhome is picked up and added to Under Inspection list");
         }
+
+        initializeRentedOutTable();
+        initializeUnderInspectionTable();
+
     }
 
     public void passButton(ActionEvent event) {
@@ -83,6 +87,8 @@ public class MechanicController implements Initializable{
             int motorhomeindex = Fleet.getInstance().getIndexOfActualMotorhome(UnderInspection.getSelectionModel().getSelectedItem().getId());
             Fleet.getInstance().getTheFleetList().get(motorhomeindex).getBookingList().get(bookingindex).addInspectionPayment(Double.valueOf(kmdriven.getText()),fuel.isSelected());
             SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome passed Incpection", "Motorhome passed Incpection and is back on the system");
+            initializeRentedOutTable();
+            initializeUnderInspectionTable();
         }
     }
 
@@ -93,14 +99,17 @@ public class MechanicController implements Initializable{
             int motorhomeindex = Fleet.getInstance().getIndexOfActualMotorhome(UnderInspection.getSelectionModel().getSelectedItem().getId());
             Fleet.getInstance().getTheFleetList().get(motorhomeindex).getBookingList().get(bookingindex).addInspectionPayment(Double.valueOf(kmdriven.getText()),fuel.isSelected());
             SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome failed Incpection", "Motorhome failed Incpection and is added to Out Of Order List");
+            initializeUnderInspectionTable();
+            initializeOutOfOrderTable();
         }
         }
 
 
     public void passButton2(ActionEvent event) {
         if (event.getSource().equals(repaired)) {
-            Fleet.getInstance().updateMotorhome(UnderInspection.getSelectionModel().getSelectedItem(), "status", "Available");
+            Fleet.getInstance().updateMotorhome(OutOfOrder.getSelectionModel().getSelectedItem(), "status", "Available");
             SceneManager.getInstance().displayConfirmation("Confirmation","Motorhome Repaired", "Motorhome has been repaired and is back on the system");
+            initializeOutOfOrderTable();
         }
     }
 

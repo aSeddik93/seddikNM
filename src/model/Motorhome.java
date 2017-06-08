@@ -116,7 +116,9 @@ public class Motorhome {
 
         for(Booking b : bookingList) {
 
-            return b.dropOffToday() && (Objects.equals(getStatus(), "RentedOut"));
+            if (b.dropOffToday() && Objects.equals(getStatus(), "Available")) {
+                return true;
+            }
         }
 
         return false;
